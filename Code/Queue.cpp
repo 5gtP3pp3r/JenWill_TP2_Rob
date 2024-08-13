@@ -10,7 +10,7 @@ Queue::Queue()
 
 Queue::~Queue()
 {
-	
+	while (remove());
 }
 
 Node* Queue::getLastNode() const
