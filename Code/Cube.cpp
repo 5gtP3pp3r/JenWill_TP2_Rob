@@ -41,7 +41,7 @@ Cube::Cube(string cubePath)
 						//todo : Logique des chaînages
 					}
 
-					//todo : on vient de traiter une ligne donc ...
+				y++;
 			}
 
 		}
