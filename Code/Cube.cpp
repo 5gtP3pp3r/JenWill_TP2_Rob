@@ -31,14 +31,29 @@ Cube::Cube(string cubePath)
 			else
 			{
 				for (int x = 0; x < DIMENSION; x++)
-					{
+				{
 					Block* block = NULL;
 					block = tabBlocks[x][y][z];
 					block->x = x;
 					block->y = y;
 					block->z = z;
-						//todo : Logique des chaînages
+
+					if (x != 0)
+					{
+						block->leftBlock = tabBlocks[x - 1][y][z];
+						tabBlocks[x - 1][y][z]->rightBlock = block;
 					}
+					if (y != 0)
+					{
+						block->behindBlock = tabBlocks[x][y - 1][z];
+						tabBlocks[x][y - 1][z]->frontBlock = block;
+					}
+					if (z != 0)
+					{
+						block->downBlock = tabBlocks[x][y][z - 1];
+						tabBlocks[x][y][z - 1]->upBlock = block;
+					}
+				}
 				y++;
 			}
 		}

@@ -12,12 +12,12 @@ struct Block
 	//pour savoir s'il a été exploré
     bool visited = false; 
 	
-	Block* upBlock = nullptr;
-	Block* downBlock = nullptr;
-	Block* leftBlock = nullptr;
-	Block* frontBlock = nullptr;
-	Block* rightBlock = nullptr;
-	Block* behindBlock = nullptr;
+	Block* upBlock = nullptr;				// z + 1
+	Block* downBlock = nullptr;				// z - 1
+	Block* leftBlock = nullptr;				// x - 1
+	Block* frontBlock = nullptr;			// y + 1
+	Block* rightBlock = nullptr;			// x + 1
+	Block* behindBlock = nullptr;			// y - 1
 	
 
 	//Aide-mémoire : ces pointeurs représentent la priorité pour inspecter le labyrinthe
