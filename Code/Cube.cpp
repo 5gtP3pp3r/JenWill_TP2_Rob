@@ -12,15 +12,33 @@ Cube::Cube(string cubePath)
 	string currentLine;
 
 
-	if (streamInput)
-	{
-		//TODO : Choisir une des deux stratégies de stockage dans le fichier "options_stockage.cpp"
-		//       et l'implémenter ici
-		//NOTE : Les 2 options nécessitent la même quantité de code, prenez celle qui vous inspire le plus
+    if (streamInput)
+    {
+        //todo : initalisation des variables y et z
 
+        while (getline(streamInput, currentLine))
+        {
+            if (currentLine == "+")
+            {
+                //todo : On change de niveau
+                //todo : On replace le compteur y
+            }
 
-		streamInput.close();
-	}
+            else
+            {
+                for (//todo : Boucle du x à compléter)
+                    {
+                        //todo : Allocation des blocs dans le tableau 3D
+                        //todo : Logique des chaînages
+                    }
+
+                    //todo : on vient de traiter une ligne donc ...
+            }
+
+        }
+        streamInput.close();
+
+    }
 }
 
 
