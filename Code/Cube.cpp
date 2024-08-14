@@ -12,39 +12,40 @@ Cube::Cube(string cubePath)
 	string currentLine;
 
 
-    if (streamInput)
-    {
-        //todo : initalisation des variables y et z
+	if (streamInput)
+	{
+		//todo : initalisation des variables y et z
+		int y = 0;
+		int z = 0;
+		while (getline(streamInput, currentLine))
+		{
+			if (currentLine == "+")
+			{
+				//todo : On change de niveau
+				//todo : On replace le compteur y
+			}
 
-        while (getline(streamInput, currentLine))
-        {
-            if (currentLine == "+")
-            {
-                //todo : On change de niveau
-                //todo : On replace le compteur y
-            }
+			else
+			{
+				for (//todo : Boucle du x à compléter)
+					{
+						//todo : Allocation des blocs dans le tableau 3D
+						//todo : Logique des chaînages
+					}
 
-            else
-            {
-                for (//todo : Boucle du x à compléter)
-                    {
-                        //todo : Allocation des blocs dans le tableau 3D
-                        //todo : Logique des chaînages
-                    }
+					//todo : on vient de traiter une ligne donc ...
+			}
 
-                    //todo : on vient de traiter une ligne donc ...
-            }
+		}
+		streamInput.close();
 
-        }
-        streamInput.close();
-
-    }
+	}
 }
 
 
 Cube::~Cube()
 {
-	
+
 }
 
 Block* Cube::getStartBlock()
@@ -55,5 +56,5 @@ Block* Cube::getStartBlock()
 
 void Cube::resetAllVisitedBlocksToFalse()
 {
-	
+
 }
