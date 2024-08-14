@@ -24,7 +24,7 @@ void ROB::solvePathToExit()
 /// <summary>
 /// Permet de trouver récursivement tous les points en utilisant la file allPoints
 /// N'oubliez pas de diviser le problème, si le problème n'est pas divisible, appel
-/// résursif est inutile et le robot courant doit continuer son exploration
+/// récursif est inutile et le robot courant doit continuer son exploration
 /// </summary>
 void ROB::solveAllPoints(Block * startingBlock)
 {
