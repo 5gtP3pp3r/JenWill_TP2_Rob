@@ -46,6 +46,10 @@ Cube::Cube(string cubePath)
 						block->value = currentLine[x];
 					}
 					block->value = currentLine[x];
+					if (currentLine[x] == 'S')
+					{
+						startBlock = tabBlocks[x][y][z];
+					}
 
 					if (x != 0)
 					{
