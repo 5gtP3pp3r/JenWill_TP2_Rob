@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Cube.h"
+#include "constants.h"
 
 
 //TODO : Compléter cette classe
@@ -20,13 +21,13 @@ Cube::Cube(string cubePath)
 		{
 			if (currentLine == "+")
 			{
-				//todo : On change de niveau
-				//todo : On replace le compteur y
+				z++;
+				y = 0;
 			}
 
 			else
 			{
-				for (//todo : Boucle du x à compléter)
+				for (int x = 0; x < DIMENSION; x++)
 					{
 						//todo : Allocation des blocs dans le tableau 3D
 						//todo : Logique des chaînages
