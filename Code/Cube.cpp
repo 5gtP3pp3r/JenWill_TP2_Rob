@@ -28,7 +28,6 @@ Cube::Cube(string cubePath)
 				z++;
 				y = 0;
 			}
-
 			else
 			{
 				for (int x = 0; x < DIMENSION; x++)
@@ -40,13 +39,10 @@ Cube::Cube(string cubePath)
 					block->z = z;
 						//todo : Logique des chaînages
 					}
-
 				y++;
 			}
-
 		}
 		streamInput.close();
-
 	}
 }
 
