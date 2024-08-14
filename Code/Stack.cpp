@@ -37,7 +37,7 @@ void Stack::display() const
 {
 	Node* currentNode = this->getFirstNode();
 	while (currentNode != NULL) {
-		currentNode->getBlock()->display();
+		currentNode->getBlock()->display();     // À mettre à jour plus tard    le display sera polimorphe pour l'affichage du stack et queue
 		currentNode = currentNode->getNext();
 	}
 }
