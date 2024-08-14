@@ -52,7 +52,7 @@ Block* Queue::remove()
 void Queue::display() const
 {
 	Node* currentNode = getFirstNode();
-	cout << endl;
+	cout << endl << "Points trouvés:" << endl;
 	while (currentNode != NULL)
 	{
 		cout << currentNode->getBlock()->points << endl;
