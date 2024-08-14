@@ -12,6 +12,10 @@ Cube::Cube(string cubePath)
 	streamInput.open(cubePath);
 	string currentLine;
 
+	startBlock = tabBlocks[0][0][0];
+	startBlock->x = 0;
+	startBlock->y = 0;
+	startBlock->z = 0;
 
 	if (streamInput)
 	{
@@ -29,7 +33,11 @@ Cube::Cube(string cubePath)
 			{
 				for (int x = 0; x < DIMENSION; x++)
 					{
-						//todo : Allocation des blocs dans le tableau 3D
+					Block* block = NULL;
+					block = tabBlocks[x][y][z];
+					block->x = x;
+					block->y = y;
+					block->z = z;
 						//todo : Logique des chaînages
 					}
 
