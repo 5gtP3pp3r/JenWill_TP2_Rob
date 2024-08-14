@@ -14,7 +14,6 @@ Cube::Cube(string cubePath)
 
 	if (streamInput)
 	{
-		//todo : initalisation des variables y et z
 		int y = 0;
 		int z = 0;
 		while (getline(streamInput, currentLine))
