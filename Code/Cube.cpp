@@ -2,7 +2,6 @@
 #include "Cube.h"
 #include "constants.h"
 
-
 //TODO : Compléter cette classe
 
 
@@ -37,6 +36,16 @@ Cube::Cube(string cubePath)
 					block->x = x;
 					block->y = y;
 					block->z = z;
+
+					if (isdigit(currentLine[x])) {
+						block->points = currentLine[x];
+						block->value = ' ';
+					}
+					else {
+						block->points = 0;
+						block->value = currentLine[x];
+					}
+					block->value = currentLine[x];
 
 					if (x != 0)
 					{
