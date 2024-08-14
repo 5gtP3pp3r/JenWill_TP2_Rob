@@ -36,8 +36,13 @@ void Stack::push(Block* block)
 void Stack::display() const
 {
 	Node* currentNode = this->getFirstNode();
+	cout << endl;
 	while (currentNode != NULL) {
-		currentNode->getBlock()->display();     // À mettre à jour plus tard    le display sera polimorphe pour l'affichage du stack et queue
+		cout << "[ " 
+			 << currentNode->getBlock()->x << ", " 
+			 << currentNode->getBlock()->y << ", " 
+			 << currentNode->getBlock()->z 
+			 << " ]" << endl;                                // À mettre à jour plus tard    le display sera polymorphe pour l'affichage du stack et queue
 		currentNode = currentNode->getNext();
 	}
 }
