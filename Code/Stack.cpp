@@ -42,7 +42,7 @@ void Stack::display() const
 			 << currentNode->getBlock()->x << ", " 
 			 << currentNode->getBlock()->y << ", " 
 			 << currentNode->getBlock()->z 
-			 << " ]" << endl;                                // À mettre à jour plus tard    le display sera polymorphe pour l'affichage du stack et queue
+			 << " ]" << endl;                                // À revoir plus tard    le display sera polymorphe pour l'affichage du stack et queue
 		currentNode = currentNode->getNext();
 	}
 }
