@@ -18,7 +18,14 @@ ROB::~ROB()
 /// </summary>
 void ROB::solvePathToExit()
 {
-	
+	Stack blockPath;
+	blockPath.push(cube->getStartBlock());
+	Block currentBlock;
+
+	while (blockPath.getFirstNode()->getBlock()->value != 'E') 
+	{
+		
+	}
 }
 
 /// <summary>
