@@ -4,13 +4,13 @@
 
 ROB::ROB(Cube* _cube)
 {
-	
+
 }
 
 
 ROB::~ROB()
 {
-	
+
 }
 
 /// <summary>
@@ -20,11 +20,54 @@ void ROB::solvePathToExit()
 {
 	Stack blockPath;
 	blockPath.push(cube->getStartBlock());
-	Block currentBlock;
+	Block* currentBlock = blockPath.getFirstNode()->getBlock();
 
-	while (blockPath.getFirstNode()->getBlock()->value != 'E') 
+	while (currentBlock->value != 'E')
 	{
-		
+		if (currentBlock->upBlock->value != '*' ||
+			currentBlock->upBlock->value != NULL &&
+		   !currentBlock->visited)
+		{
+			currentBlock->visited = true;
+			blockPath.push(currentBlock->upBlock);
+		}
+		else if (currentBlock->downBlock->value != '*' ||
+			     currentBlock->downBlock->value != NULL &&
+			    !currentBlock->visited)
+		{
+			currentBlock->visited = true;
+			blockPath.push(currentBlock->downBlock);
+		}
+		else if (currentBlock->leftBlock->value != '*' ||
+			     currentBlock->leftBlock->value != NULL &&
+			    !currentBlock->visited)
+		{
+			currentBlock->visited = true;
+			blockPath.push(currentBlock->leftBlock);
+		}
+		else if (currentBlock->rightBlock->value != '*' ||
+			     currentBlock->rightBlock->value != NULL &&
+			    !currentBlock->visited)
+		{
+			currentBlock->visited = true;
+			blockPath.push(currentBlock->rightBlock);
+		}
+		else if (currentBlock->frontBlock->value != '*' ||
+			     currentBlock->frontBlock->value != NULL &&
+			    !currentBlock->visited)
+		{
+			currentBlock->visited = true;
+			blockPath.push(currentBlock->frontBlock);
+		}
+		else if (currentBlock->behindBlock->value != '*' ||
+			     currentBlock->behindBlock->value != NULL &&
+			    !currentBlock->visited)
+		{
+			currentBlock->visited = true;
+			blockPath.push(currentBlock->behindBlock);
+		}
+
+		blockPath.pop();
 	}
 }
 
@@ -33,9 +76,9 @@ void ROB::solvePathToExit()
 /// N'oubliez pas de diviser le problème, si le problème n'est pas divisible, appel
 /// récursif est inutile et le robot courant doit continuer son exploration
 /// </summary>
-void ROB::solveAllPoints(Block * startingBlock)
+void ROB::solveAllPoints(Block* startingBlock)
 {
-	
+
 }
 
 /// <summary>
@@ -45,15 +88,15 @@ void ROB::solveAllPoints(Block * startingBlock)
 /// </summary>
 /// <returns> l'Adresse de la Stack contenant la solution du labyrinthe dans le bon ordre</returns>
 
-Stack * ROB::getSolutionPathToExit()
+Stack* ROB::getSolutionPathToExit()
 {
 	//TODO : Réorganiser le chemin de sortie
-	
+
 	return (Stack*)&reversedStepsToExit;
 }
 
 /// <returns>l'Adresse de la Queue contenant la solution des points </returns>
-Queue * ROB::getSolutionAllPoints() const
+Queue* ROB::getSolutionAllPoints() const
 {
 	return (Queue*)&allPoints;
 }
