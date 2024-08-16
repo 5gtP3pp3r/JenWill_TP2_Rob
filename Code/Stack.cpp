@@ -40,7 +40,7 @@ void Stack::display() const
 			 << currentNode->getBlock()->x << ", "  
 			 << currentNode->getBlock()->y << ", " 
 			 << currentNode->getBlock()->z 
-			 << " ]" /* << endl*/;
+			 << " ]";
 		if (currentNode->getBlock()->value == 'S')
 		{
 			cout << " Bloc de depart";
