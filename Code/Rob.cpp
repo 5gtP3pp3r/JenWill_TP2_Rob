@@ -18,56 +18,51 @@ ROB::~ROB()
 /// </summary>
 void ROB::solvePathToExit()
 {
-	Stack blockPath;
-	blockPath.push(cube->getStartBlock());
-	Block* currentBlock = blockPath.getFirstNode()->getBlock();
+	stepsToExit.push(cube->getStartBlock());
+	Block* currentBlock = stepsToExit.getFirstNode()->getBlock();
 
 	while (currentBlock->value != 'E')
 	{
-		if (currentBlock->upBlock->value != '*' ||
-			currentBlock->upBlock->value != NULL &&
-		   !currentBlock->visited)
+		if (currentBlock->upBlock->value=='U')
 		{
 			currentBlock->visited = true;
-			blockPath.push(currentBlock->upBlock);
+			stepsToExit.push(currentBlock->upBlock);
 		}
-		else if (currentBlock->downBlock->value != '*' ||
-			     currentBlock->downBlock->value != NULL &&
-			    !currentBlock->visited)
+		else if (currentBlock->downBlock->value=='D')
 		{
 			currentBlock->visited = true;
-			blockPath.push(currentBlock->downBlock);
+			stepsToExit.push(currentBlock->downBlock);
 		}
 		else if (currentBlock->leftBlock->value != '*' ||
-			     currentBlock->leftBlock->value != NULL &&
-			    !currentBlock->visited)
+			currentBlock->leftBlock->value != NULL &&
+			!currentBlock->visited)
 		{
 			currentBlock->visited = true;
-			blockPath.push(currentBlock->leftBlock);
+			stepsToExit.push(currentBlock->leftBlock);
 		}
 		else if (currentBlock->rightBlock->value != '*' ||
-			     currentBlock->rightBlock->value != NULL &&
-			    !currentBlock->visited)
+			currentBlock->rightBlock->value != NULL &&
+			!currentBlock->visited)
 		{
 			currentBlock->visited = true;
-			blockPath.push(currentBlock->rightBlock);
+			stepsToExit.push(currentBlock->rightBlock);
 		}
 		else if (currentBlock->frontBlock->value != '*' ||
-			     currentBlock->frontBlock->value != NULL &&
-			    !currentBlock->visited)
+			currentBlock->frontBlock->value != NULL &&
+			!currentBlock->visited)
 		{
 			currentBlock->visited = true;
-			blockPath.push(currentBlock->frontBlock);
+			stepsToExit.push(currentBlock->frontBlock);
 		}
 		else if (currentBlock->behindBlock->value != '*' ||
-			     currentBlock->behindBlock->value != NULL &&
-			    !currentBlock->visited)
+			currentBlock->behindBlock->value != NULL &&
+			!currentBlock->visited)
 		{
 			currentBlock->visited = true;
-			blockPath.push(currentBlock->behindBlock);
+			stepsToExit.push(currentBlock->behindBlock);
 		}
 
-		blockPath.pop();
+		stepsToExit.pop();
 	}
 }
 
@@ -90,7 +85,10 @@ void ROB::solveAllPoints(Block* startingBlock)
 
 Stack* ROB::getSolutionPathToExit()
 {
-	//TODO : Réorganiser le chemin de sortie
+	while (reversedStepsToExit.getFirstNode()->getBlock()->value != 'S')
+	{
+		reversedStepsToExit.push(stepsToExit.pop());
+	}
 
 	return (Stack*)&reversedStepsToExit;
 }
