@@ -38,7 +38,7 @@ void Stack::display() const
 	Node* currentNode = this->getFirstNode();
 	while (currentNode != NULL) {
 		cout << "[ " 
-			 << currentNode->getBlock()->x << ", "  // Quelque chose empêche l'appel de getBlock... le retour est NULL
+			 << currentNode->getBlock()->x << ", "  
 			 << currentNode->getBlock()->y << ", " 
 			 << currentNode->getBlock()->z 
 			 << " ]" << endl;                                
