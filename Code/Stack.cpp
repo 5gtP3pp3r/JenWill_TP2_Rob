@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "Stack.h"
 
-//TODO : Amenez le code de votre pile
-//TODO : Codez le display selon les spécifications d'affichage
 Stack::Stack()
 {
 	
