@@ -20,6 +20,12 @@ Cube::Cube(string cubePath)
 		int z = 0;
 		while (getline(streamInput, currentLine))
 		{
+			/*int dimension = 0;
+			if (currentLine != "+")                   est que cette idée a une valeur?
+			{
+				dimension = currentLine.length();
+			}*/
+
 			if (currentLine == "+")
 			{
 				z++;
