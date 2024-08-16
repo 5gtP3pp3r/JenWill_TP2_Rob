@@ -19,10 +19,11 @@ ROB::~ROB()
 void ROB::solvePathToExit()
 {
 	stepsToExit.push(cube->getStartBlock());
-	Block* currentBlock = stepsToExit.getFirstNode()->getBlock();
+	Block* currentBlock;
 
 	while (currentBlock->value != 'E')
 	{
+		currentBlock = stepsToExit.getFirstNode()->getBlock();
 		if (currentBlock->upBlock->value=='U')
 		{
 			currentBlock->visited = true;
