@@ -45,7 +45,6 @@ Cube::Cube(string cubePath)
 					{
 						startBlock = tabBlocks[x][y][z];
 					}
-
 					if (x != 0)
 					{
 						block->leftBlock = tabBlocks[x - 1][y][z];
