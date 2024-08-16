@@ -11,11 +11,6 @@ Cube::Cube(string cubePath)
 	streamInput.open(cubePath);
 	string currentLine;
 
-	startBlock = tabBlocks[0][0][0];
-	startBlock->x = 0;
-	startBlock->y = 0;
-	startBlock->z = 0;
-
 	if (streamInput)
 	{
 		int y = 0;
