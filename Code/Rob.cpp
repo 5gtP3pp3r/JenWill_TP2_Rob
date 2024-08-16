@@ -24,36 +24,43 @@ void ROB::solvePathToExit()
 	while (currentBlock->value != 'E')
 	{
 		currentBlock = stepsToExit.getFirstNode()->getBlock();
-		if (currentBlock->upBlock->value == 'U')
+		if (currentBlock->value == 'U')
 		{
 			stepsToExit.push(currentBlock->upBlock);
 		}
-		else if (currentBlock->downBlock->value == 'D')
+		else if (currentBlock->value == 'D')
 		{
 			stepsToExit.push(currentBlock->downBlock);
 		}
-		else if (currentBlock->leftBlock->value != '*' &&
-			!currentBlock->visited)
+		else if (currentBlock->leftBlock != NULL && 
+				 currentBlock->leftBlock->value != '*' &&
+			    !currentBlock->leftBlock->visited)
 		{
 			stepsToExit.push(currentBlock->leftBlock);
 		}
-		else if (currentBlock->rightBlock->value != '*' &&
-			!currentBlock->visited)
+		else if (currentBlock->rightBlock != NULL && 
+				 currentBlock->rightBlock->value != '*' &&
+			    !currentBlock->rightBlock->visited)
 		{
 			stepsToExit.push(currentBlock->rightBlock);
 		}
-		else if (currentBlock->frontBlock->value != '*' &&
-			!currentBlock->visited)
+		else if (currentBlock->frontBlock != NULL && 
+				 currentBlock->frontBlock->value != '*' &&
+			    !currentBlock->frontBlock->visited)
 		{
 			stepsToExit.push(currentBlock->frontBlock);
 		}
-		else if (currentBlock->behindBlock->value != '*' &&
-			!currentBlock->visited)
+		else if (currentBlock->behindBlock != NULL && 
+				 currentBlock->behindBlock->value != '*' &&
+			    !currentBlock->behindBlock->visited)
 		{
 			stepsToExit.push(currentBlock->behindBlock);
 		}
-		currentBlock->visited = true;
-		stepsToExit.pop();
+		else 
+		{
+			currentBlock->visited = true;
+			stepsToExit.pop();
+		}		
 	}
 }
 
