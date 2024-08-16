@@ -17,9 +17,10 @@ ROB::~ROB()
 /// Permet de trouver le chemin de sortie en utilisant la pile stepsToExit
 /// </summary>
 void ROB::solvePathToExit()
-{
-	stepsToExit.push(cube->getStartBlock());
-	Block* currentBlock = cube->getStartBlock();
+{	
+	Block* currentBlock = cube->getStartBlock();    // modifié pour voir l'adresse du bloc ici avant de push
+	stepsToExit.push(currentBlock);
+	
 
 	while (currentBlock->value != 'E')
 	{
