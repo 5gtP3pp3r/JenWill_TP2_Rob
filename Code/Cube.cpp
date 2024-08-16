@@ -11,6 +11,9 @@ Cube::Cube(string cubePath)
 	streamInput.open(cubePath);
 	string currentLine;
 
+	Block* currentBlock = new Block;
+	startBlock = NULL;
+
 	if (streamInput)
 	{
 		int y = 0;
@@ -26,39 +29,40 @@ Cube::Cube(string cubePath)
 			{
 				for (int x = 0; x < DIMENSION; x++)
 				{
-					Block* block = NULL;
-					block = tabBlocks[x][y][z];
-					block->x = x;
-					block->y = y;
-					block->z = z;
+					currentBlock = tabBlocks[x][y][z];
+					currentBlock->x = x;
+					currentBlock->y = y;
+					currentBlock->z = z;
 
 					if (isdigit(currentLine[x])) {
-						block->points = currentLine[x];
-						block->value = ' ';
+						currentBlock->points = currentLine[x];
+						currentBlock->value = ' ';
 					}
 					else {
-						block->points = 0;
-						block->value = currentLine[x];
+						currentBlock->points = 0;
+						currentBlock->value = currentLine[x];
 					}
-					block->value = currentLine[x];
+
+					currentBlock->value = currentLine[x];
+
 					if (currentLine[x] == 'S')
 					{
 						startBlock = tabBlocks[x][y][z];
 					}
 					if (x != 0)
 					{
-						block->leftBlock = tabBlocks[x - 1][y][z];
-						tabBlocks[x - 1][y][z]->rightBlock = block;
+						currentBlock->leftBlock = tabBlocks[x - 1][y][z];
+						tabBlocks[x - 1][y][z]->rightBlock = currentBlock;
 					}
 					if (y != 0)
 					{
-						block->behindBlock = tabBlocks[x][y - 1][z];
-						tabBlocks[x][y - 1][z]->frontBlock = block;
+						currentBlock->behindBlock = tabBlocks[x][y - 1][z];
+						tabBlocks[x][y - 1][z]->frontBlock = currentBlock;
 					}
 					if (z != 0)
 					{
-						block->downBlock = tabBlocks[x][y][z - 1];
-						tabBlocks[x][y][z - 1]->upBlock = block;
+						currentBlock->downBlock = tabBlocks[x][y][z - 1];
+						tabBlocks[x][y][z - 1]->upBlock = currentBlock;
 					}
 				}
 				y++;
@@ -71,7 +75,16 @@ Cube::Cube(string cubePath)
 
 Cube::~Cube()
 {
-
+	for (int z = 0; z < DIMENSION; z++)
+	{
+		for (int y = 0; y < DIMENSION; y++)
+		{
+			for (int x = 0; x < DIMENSION; x++)
+			{
+				delete tabBlocks[x][y][z];
+			}
+		}
+	}
 }
 
 Block* Cube::getStartBlock()
