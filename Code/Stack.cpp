@@ -36,7 +36,6 @@ void Stack::push(Block* block)
 void Stack::display() const
 {
 	Node* currentNode = this->getFirstNode();
-	cout << endl << "Chemin des blocs vers la sortie:" << endl;
 	while (currentNode != NULL) {
 		cout << "[ " 
 			 << currentNode->getBlock()->x << ", "  // Quelque chose empêche l'appel de getBlock... le retour est NULL
