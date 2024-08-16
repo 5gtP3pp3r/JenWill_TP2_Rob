@@ -20,6 +20,7 @@ void ROB::solvePathToExit()
 {	
 	Block* currentBlock = cube->getStartBlock();    // modifié pour voir l'adresse du bloc ici avant de push
 	stepsToExit.push(currentBlock);
+	cout << endl << "push startBlock" << endl;
 	
 	while (currentBlock->value != 'E')
 	{
