@@ -36,12 +36,22 @@ void Stack::push(Block* block)
 void Stack::display() const
 {
 	Node* currentNode = this->getFirstNode();
+	cout << endl;
 	while (currentNode != NULL) {
 		cout << "[ " 
 			 << currentNode->getBlock()->x << ", "  
 			 << currentNode->getBlock()->y << ", " 
 			 << currentNode->getBlock()->z 
-			 << " ]" << endl;                                
+			 << " ]" /* << endl*/;
+		if (currentNode->getBlock()->value == 'S')
+		{
+			cout << " Bloc de depart";
+		}
+		if (currentNode->getBlock()->value == 'E')
+		{
+			cout << " Bloc de sortie" << endl;
+		}
+		cout << endl ;
 		currentNode = currentNode->getNext();
 	}
 }
