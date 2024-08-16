@@ -91,8 +91,8 @@ void ROB::solveAllPoints(Block* startingBlock)
 
 Stack* ROB::getSolutionPathToExit()
 {
-	while (reversedStepsToExit.getFirstNode()->getBlock()->value != 'S')
-	{
+	while (stepsToExit.getFirstNode()->getBlock()->value != 'S')		// Mod condition, on pige dans stepsToExit jusqu'à la valeur 'S' et non dans reversedStepsToExit
+	{																	// À se moment reversedStepsToExit est NULL et la condition retourne NULL
 		reversedStepsToExit.push(stepsToExit.pop());
 	}
 
