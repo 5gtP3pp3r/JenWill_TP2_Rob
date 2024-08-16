@@ -24,41 +24,35 @@ void ROB::solvePathToExit()
 	while (currentBlock->value != 'E')
 	{
 		currentBlock = stepsToExit.getFirstNode()->getBlock();
-		if (currentBlock->upBlock->value=='U')
+		if (currentBlock->upBlock->value == 'U')
 		{
-			currentBlock->visited = true;
 			stepsToExit.push(currentBlock->upBlock);
 		}
-		else if (currentBlock->downBlock->value=='D')
+		else if (currentBlock->downBlock->value == 'D')
 		{
-			currentBlock->visited = true;
 			stepsToExit.push(currentBlock->downBlock);
 		}
 		else if (currentBlock->leftBlock->value != '*' &&
 			!currentBlock->visited)
 		{
-			currentBlock->visited = true;
 			stepsToExit.push(currentBlock->leftBlock);
 		}
 		else if (currentBlock->rightBlock->value != '*' &&
 			!currentBlock->visited)
 		{
-			currentBlock->visited = true;
 			stepsToExit.push(currentBlock->rightBlock);
 		}
 		else if (currentBlock->frontBlock->value != '*' &&
 			!currentBlock->visited)
 		{
-			currentBlock->visited = true;
 			stepsToExit.push(currentBlock->frontBlock);
 		}
 		else if (currentBlock->behindBlock->value != '*' &&
 			!currentBlock->visited)
 		{
-			currentBlock->visited = true;
 			stepsToExit.push(currentBlock->behindBlock);
 		}
-
+		currentBlock->visited = true;
 		stepsToExit.pop();
 	}
 }
