@@ -86,8 +86,10 @@ void ConsoleMenu::displayCredits() const
     cout << "|                       TRAVAIL PRATIQUE 2                        |" << endl;
     cout << "|                             R.O.B                               |" << endl;
     cout << "|                                                                 |" << endl;
-    cout << "|                             AUTEURS  :                          |" << endl;
-    cout << "|                            _VOS_NOMS_                           |" << endl;
+    cout << "|                            AUTEURS  :                           |" << endl;
+    cout << "|                       Jennifer  Marcotte                        |" << endl;
+    cout << "|                               &                                 |" << endl;
+    cout << "|                        William Crépault                         |" << endl;
     cout << "------------------------------------------------------------------|" << endl;
     cout << endl;
 	cout << endl;
