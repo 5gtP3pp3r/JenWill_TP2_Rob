@@ -33,29 +33,25 @@ void ROB::solvePathToExit()
 			currentBlock->visited = true;
 			stepsToExit.push(currentBlock->downBlock);
 		}
-		else if (currentBlock->leftBlock->value != '*' ||
-			currentBlock->leftBlock->value != NULL &&
+		else if (currentBlock->leftBlock->value != '*' &&
 			!currentBlock->visited)
 		{
 			currentBlock->visited = true;
 			stepsToExit.push(currentBlock->leftBlock);
 		}
-		else if (currentBlock->rightBlock->value != '*' ||
-			currentBlock->rightBlock->value != NULL &&
+		else if (currentBlock->rightBlock->value != '*' &&
 			!currentBlock->visited)
 		{
 			currentBlock->visited = true;
 			stepsToExit.push(currentBlock->rightBlock);
 		}
-		else if (currentBlock->frontBlock->value != '*' ||
-			currentBlock->frontBlock->value != NULL &&
+		else if (currentBlock->frontBlock->value != '*' &&
 			!currentBlock->visited)
 		{
 			currentBlock->visited = true;
 			stepsToExit.push(currentBlock->frontBlock);
 		}
-		else if (currentBlock->behindBlock->value != '*' ||
-			currentBlock->behindBlock->value != NULL &&
+		else if (currentBlock->behindBlock->value != '*' &&
 			!currentBlock->visited)
 		{
 			currentBlock->visited = true;
