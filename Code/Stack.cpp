@@ -39,7 +39,7 @@ void Stack::display() const
 	cout << endl << "Chemin des blocs vers la sortie:" << endl;
 	while (currentNode != NULL) {
 		cout << "[ " 
-			 << currentNode->getBlock()->x << ", " 
+			 << currentNode->getBlock()->x << ", "  // Quelque chose empêche l'appel de getBlock... le retour est NULL
 			 << currentNode->getBlock()->y << ", " 
 			 << currentNode->getBlock()->z 
 			 << " ]" << endl;                                
