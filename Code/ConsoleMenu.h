@@ -18,7 +18,7 @@ private:
 	char readValidInput(char tabValidInputs[], int nbElements) const;
 	void displayMenu() const;
 	void displayCredits() const;
-	bool manageSelection(char entry) const;	
-	void displaySolution(DataStructure &solution) const;
+	bool manageSelection(char entry) const;
+	void displaySolution(DataStructure& solution)const;
 };
 

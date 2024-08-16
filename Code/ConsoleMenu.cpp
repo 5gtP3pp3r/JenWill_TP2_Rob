@@ -180,9 +180,8 @@ bool ConsoleMenu::manageSelection(char entry) const
 	return toContinue;
 }
 
-void ConsoleMenu::displaySolution(const DataStructure& solution)
-{
+void ConsoleMenu::displaySolution(DataStructure& solution) const
+{ 
     solution.display();
 }
-//TODO : Codez la fonction displaySolution qui utilisera la fonction "display"
-//       des structures de données de façon polymorphe
+
