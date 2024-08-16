@@ -19,6 +19,7 @@ private:
 	void displayMenu() const;
 	void displayCredits() const;
 	bool manageSelection(char entry) const;
+
 	void displaySolution(DataStructure& solution)const;
 };
 
