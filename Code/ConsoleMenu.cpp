@@ -89,7 +89,7 @@ void ConsoleMenu::displayCredits() const
     cout << "|                            AUTEURS  :                           |" << endl;
     cout << "|                       Jennifer  Marcotte                        |" << endl;
     cout << "|                               &                                 |" << endl;
-    cout << "|                        William Crépault                         |" << endl;
+    cout << "|                        William Crepault                         |" << endl;
     cout << "------------------------------------------------------------------|" << endl;
     cout << endl;
 	cout << endl;
