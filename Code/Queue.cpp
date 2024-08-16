@@ -54,7 +54,7 @@ void Queue::display() const
 	Node* currentNode = getFirstNode();
 	cout << endl << "Points trouvés:" << endl;
 	while (currentNode != NULL)
-	{
+	{														/********************    AJUSTER AFFICHAGE    *******************/
 		cout << currentNode->getBlock()->points << endl;
 		currentNode = currentNode->getNext();
 	}
