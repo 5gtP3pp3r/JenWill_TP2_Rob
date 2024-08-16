@@ -30,9 +30,6 @@ Cube::Cube(string cubePath)
 				for (int x = 0; x < DIMENSION; x++)
 				{
 					currentBlock = tabBlocks[x][y][z];
-					currentBlock->x = x;
-					currentBlock->y = y;
-					currentBlock->z = z;
 
 					if (isdigit(currentLine[x])) {
 						currentBlock->points = currentLine[x];
