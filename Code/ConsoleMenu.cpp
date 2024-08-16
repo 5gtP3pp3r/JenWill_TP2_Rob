@@ -125,10 +125,10 @@ bool ConsoleMenu::manageSelection(char entry) const
 			rob.solvePathToExit();
 			cout << endl;
 			cout << "La solution du chemin de sortie est :" << endl;
-            solution = rob.getSolutionPathToExit();
-            //TODO : Codez la méthode display solution et utilisez-là pour afficher la solution
-            //       Voir directives à la fin du fichier
+            solution = rob.getSolutionPathToExit();  
+
             displaySolution(*solution);
+
 			cube.resetAllVisitedBlocksToFalse();
             
         }
@@ -154,9 +154,9 @@ bool ConsoleMenu::manageSelection(char entry) const
 			cout << endl;
             cout << "La solution des points est :" << endl;
 			solution = rob.getSolutionAllPoints();
-            //TODO : Codez la méthode display solution et utilisez-là pour afficher la solution
-            //       Voir directives à la fin du fichier
+
             displaySolution(*solution);
+
 			cube.resetAllVisitedBlocksToFalse();
 		}
 		catch (exception &e)
