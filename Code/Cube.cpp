@@ -79,9 +79,9 @@ Cube::Cube(string cubePath)
 	cout << endl << "Start Block coordinates: [ " << startBlock->x << ", " << startBlock->y << ", " << startBlock->z << " ]" << endl;
 	cout << "Start Block value: (" << startBlock->value << ") Start Block points: (" << startBlock->points << ")" << endl;
 	cout << "Start Block address: \"" << *(&startBlock) << "\"" << endl;
-}		/********** On a un trouble de retour null à la méthode getStartBlock(). Ajout de plein de cout pour confirmer les index valeurs des attributs et adresses **********/
+}		/********** On a un trouble de retour NULL à la méthode getStartBlock(). Ajout de plein de cout pour confirmer les index valeurs des attributs et adresses **********/
 		/******* Les affichage montre bien que les adresses et que les transferts d'adresses entre les positions du tableau, des blocks et même de startBlock suivent *******/
-		/******* Le problème doit venir au moment d'appeler la méthode getStartBlock() dans Rob et sont utilisation au autre *******/
+		/******* Le problème doit venir au moment d'appeler la méthode getStartBlock() dans Rob et sont utilisation ou autre *******/
 
 Cube::~Cube()
 {
