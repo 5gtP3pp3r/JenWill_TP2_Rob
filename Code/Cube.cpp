@@ -11,21 +11,15 @@ Cube::Cube(string cubePath)
 	streamInput.open(cubePath);
 	string currentLine;
 
-	Block* currentBlock = new Block;
+	Block* currentBlock = NULL;
 	startBlock = NULL;
 
 	if (streamInput)
 	{
 		int y = 0;
-		int z = 0;
+		int z = -1;
 		while (getline(streamInput, currentLine))
 		{
-			/*int dimension = 0;
-			if (currentLine != "+")                   est que cette idée a une valeur?
-			{
-				dimension = currentLine.length();
-			}*/
-
 			if (currentLine == "+")
 			{
 				z++;
@@ -35,7 +29,11 @@ Cube::Cube(string cubePath)
 			{
 				for (int x = 0; x < DIMENSION; x++)
 				{
+					tabBlocks[x][y][z] = new Block;
 					currentBlock = tabBlocks[x][y][z];
+					currentBlock->x = x;
+					currentBlock->y = y;
+					currentBlock->z = z;
 
 					if (isdigit(currentLine[x])) {
 						currentBlock->points = currentLine[x];
@@ -50,7 +48,7 @@ Cube::Cube(string cubePath)
 
 					if (currentLine[x] == 'S')
 					{
-						startBlock = tabBlocks[x][y][z];
+						startBlock = currentBlock;
 					}
 					if (x != 0)
 					{
