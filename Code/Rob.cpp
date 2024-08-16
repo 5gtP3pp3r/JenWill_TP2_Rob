@@ -19,7 +19,7 @@ ROB::~ROB()
 void ROB::solvePathToExit()
 {
 	stepsToExit.push(cube->getStartBlock());
-	Block* currentBlock;
+	Block* currentBlock = cube->getStartBlock();
 
 	while (currentBlock->value != 'E')
 	{
