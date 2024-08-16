@@ -20,3 +20,4 @@ obj/
 *.log
 *.lck
 *.vscode/
+/Debug
