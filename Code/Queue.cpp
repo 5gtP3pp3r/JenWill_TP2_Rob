@@ -53,7 +53,6 @@ void Queue::display() const
 {
 	Node* currentNode = getFirstNode();
 	int total = 0;
-	cout << endl << "Points trouvés:" << endl;
 	while (currentNode != NULL)
 	{														
 		cout << currentNode->getBlock()->points 
