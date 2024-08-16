@@ -4,7 +4,7 @@
 
 ROB::ROB(Cube* _cube)
 {
-
+	cube = _cube;
 }
 
 
@@ -21,7 +21,6 @@ void ROB::solvePathToExit()
 	Block* currentBlock = cube->getStartBlock();    // modifié pour voir l'adresse du bloc ici avant de push
 	stepsToExit.push(currentBlock);
 	
-
 	while (currentBlock->value != 'E')
 	{
 		currentBlock = stepsToExit.getFirstNode()->getBlock();
