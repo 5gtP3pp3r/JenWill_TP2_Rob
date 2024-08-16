@@ -95,5 +95,17 @@ Block* Cube::getStartBlock()
 
 void Cube::resetAllVisitedBlocksToFalse()
 {
-
+	for (int z = 0; z < DIMENSION; z++)
+	{
+		for (int y = 0; y < DIMENSION; y++)
+		{
+			for (int x = 0; x < DIMENSION; x++)
+			{
+				if (tabBlocks[x][y][z]->value != '*')
+				{
+					tabBlocks[x][y][z]->visited = false;
+				}
+			}
+		}
+	}
 }
