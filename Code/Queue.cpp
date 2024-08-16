@@ -52,10 +52,17 @@ Block* Queue::remove()
 void Queue::display() const
 {
 	Node* currentNode = getFirstNode();
+	int total = 0;
 	cout << endl << "Points trouvés:" << endl;
 	while (currentNode != NULL)
-	{														/********************    AJUSTER AFFICHAGE    *******************/
-		cout << currentNode->getBlock()->points << endl;
+	{														
+		cout << currentNode->getBlock()->points 
+			 << "points dans le bloc" << "[ " 
+			 << currentNode->getBlock()->x << ", "
+			 << currentNode->getBlock()->y << ", " 
+			 << currentNode->getBlock()->z << " ]" << endl;
+
 		currentNode = currentNode->getNext();
 	}
+	cout << "Pour un total de " << total << " points" << endl;
 }
