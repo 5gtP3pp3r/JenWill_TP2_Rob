@@ -17,7 +17,7 @@ Cube::Cube(string cubePath)
 	if (streamInput)
 	{
 		int y = 0;
-		int z = -1;														// Le fichier commence par un "+" ce qui fok le premier incrément de "z" à la ligne 25
+		int z = -1;														// Le fichier .txt commence par un "+" ce qui fok le premier incrément de "z" à la ligne 25
 		while (getline(streamInput, currentLine))
 		{
 			if (currentLine == "+")
