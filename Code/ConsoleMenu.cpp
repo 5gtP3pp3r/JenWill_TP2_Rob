@@ -126,7 +126,7 @@ bool ConsoleMenu::manageSelection(char entry) const
             solution = rob.getSolutionPathToExit();
             //TODO : Codez la méthode display solution et utilisez-là pour afficher la solution
             //       Voir directives à la fin du fichier
-            //displaySolution(*solution);
+            displaySolution(*solution);
 			cube.resetAllVisitedBlocksToFalse();
             
         }
@@ -154,7 +154,7 @@ bool ConsoleMenu::manageSelection(char entry) const
 			solution = rob.getSolutionAllPoints();
             //TODO : Codez la méthode display solution et utilisez-là pour afficher la solution
             //       Voir directives à la fin du fichier
-            //displaySolution(*solution);
+            displaySolution(*solution);
 			cube.resetAllVisitedBlocksToFalse();
 		}
 		catch (exception &e)
@@ -180,5 +180,9 @@ bool ConsoleMenu::manageSelection(char entry) const
 	return toContinue;
 }
 
+void ConsoleMenu::displaySolution(const DataStructure& solution)
+{
+    solution.display();
+}
 //TODO : Codez la fonction displaySolution qui utilisera la fonction "display"
 //       des structures de données de façon polymorphe
