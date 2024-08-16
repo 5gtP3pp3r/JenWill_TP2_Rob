@@ -102,7 +102,7 @@ void Cube::resetAllVisitedBlocksToFalse()
 		{
 			for (int x = 0; x < DIMENSION; x++)
 			{
-				if (tabBlocks[x][y][z]->value != '*')
+				if (tabBlocks[x][y][z]->visited == true)
 				{
 					tabBlocks[x][y][z]->visited = false;
 				}
