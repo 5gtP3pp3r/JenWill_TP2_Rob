@@ -27,40 +27,47 @@ void ROB::solvePathToExit()
 		if (currentBlock->value == 'U')
 		{
 			stepsToExit.push(currentBlock->upBlock);
+			cout << "push up" << endl;
 		}
 		else if (currentBlock->value == 'D')
 		{
 			stepsToExit.push(currentBlock->downBlock);
+			cout << "push down" << endl;
 		}
 		else if (currentBlock->leftBlock != NULL && 
 				 currentBlock->leftBlock->value != '*' &&
 			    !currentBlock->leftBlock->visited)
 		{
 			stepsToExit.push(currentBlock->leftBlock);
+			cout << "push left" << endl;
 		}
 		else if (currentBlock->rightBlock != NULL && 
 				 currentBlock->rightBlock->value != '*' &&
 			    !currentBlock->rightBlock->visited)
 		{
 			stepsToExit.push(currentBlock->rightBlock);
+			cout << "push right" << endl;
 		}
 		else if (currentBlock->frontBlock != NULL && 
 				 currentBlock->frontBlock->value != '*' &&
 			    !currentBlock->frontBlock->visited)
 		{
 			stepsToExit.push(currentBlock->frontBlock);
+			cout << "push front" << endl;
 		}
 		else if (currentBlock->behindBlock != NULL && 
 				 currentBlock->behindBlock->value != '*' &&
 			    !currentBlock->behindBlock->visited)
 		{
 			stepsToExit.push(currentBlock->behindBlock);
+			cout << "push back" << endl;
 		}
 		else 
-		{
-			currentBlock->visited = true;
+		{			
 			stepsToExit.pop();
-		}		
+			cout << "pop, back to last block" << endl;
+		}
+		currentBlock->visited = true;
 	}
 }
 
