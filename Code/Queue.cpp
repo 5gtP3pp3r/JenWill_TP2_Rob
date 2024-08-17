@@ -53,15 +53,17 @@ void Queue::display() const
 {
 	Node* currentNode = getFirstNode();
 	int total = 0;
+	cout << endl;
 	while (currentNode != NULL)
 	{														
 		cout << currentNode->getBlock()->points 
-			 << "points dans le bloc" << "[ " 
+			 << " points dans le bloc " << "[ " 
 			 << currentNode->getBlock()->x << ", "
 			 << currentNode->getBlock()->y << ", " 
 			 << currentNode->getBlock()->z << " ]" << endl;
 
+		total += currentNode->getBlock()->points;
 		currentNode = currentNode->getNext();
 	}
-	cout << "Pour un total de " << total << " points" << endl;
+	cout << "Pour un total de " << total << " points" << endl << endl;
 }
