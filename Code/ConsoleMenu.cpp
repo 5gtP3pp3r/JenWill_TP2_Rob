@@ -150,7 +150,7 @@ bool ConsoleMenu::manageSelection(char entry) const
 		try
 		{
             Queue* solution;
-            rob.solveAllPoints(NULL);
+            rob.solveAllPoints(NULL);                           // Surement le startBlock à mettre en paramètre dans solveAllPoints(cube->startBlock);
 			cout << endl;
             cout << "La solution des points est :" << endl;
 			solution = rob.getSolutionAllPoints();
