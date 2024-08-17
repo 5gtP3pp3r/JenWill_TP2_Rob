@@ -28,8 +28,8 @@ void ROB::solvePathToExit()
 		if (currentBlock->value == 'U')
 		{
 			stepsToExit.push(currentBlock->upBlock);
-			cout << "push up" << endl;
-		}
+			cout << "push up" << endl;							/**********  HINT isoler une variable au lieux de rechercher à chaque tour dans la condition while  *******/
+		}									
 		else if (currentBlock->value == 'D')
 		{
 			stepsToExit.push(currentBlock->downBlock);
