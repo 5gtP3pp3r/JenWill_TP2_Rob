@@ -82,15 +82,20 @@ void ConsoleMenu::displayMenu() const
 /// </summary>
 void ConsoleMenu::displayCredits() const
 {
-	cout << "-------------------------------------------------------------------" << endl;
+	cout << " _________________________________________________________________ " << endl;
     cout << "|                       TRAVAIL PRATIQUE 2                        |" << endl;
     cout << "|                             R.O.B                               |" << endl;
     cout << "|                                                                 |" << endl;
     cout << "|                            AUTEURS  :                           |" << endl;
+    cout << "|                                                                 |" << endl;
     cout << "|                       Jennifer  Marcotte                        |" << endl;
     cout << "|                               &                                 |" << endl;
     cout << "|                        William Crepault                         |" << endl;
-    cout << "------------------------------------------------------------------|" << endl;
+    cout << "|                                                                 |" << endl;
+    cout << "|                       mettant en vedette                        |" << endl;
+    cout << "|                                                                 |" << endl;
+    cout << "|                *****  JennWillRobExperts  *****                 |" << endl;
+    cout << "|_________________________________________________________________|" << endl;
     cout << endl;
 	cout << endl;
 }
@@ -150,7 +155,7 @@ bool ConsoleMenu::manageSelection(char entry) const
 		try
 		{
             Queue* solution;
-            rob.solveAllPoints(NULL);                           // Surement le startBlock à mettre en paramètre dans solveAllPoints(cube->startBlock);
+            rob.solveAllPoints(cube.getStartBlock());                           // Surement le startBlock à mettre en paramètre dans solveAllPoints(cube.getStartBlock());
 			cout << endl;
             cout << "La solution des points est :" << endl;
 			solution = rob.getSolutionAllPoints();
