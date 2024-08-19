@@ -25,40 +25,32 @@ void ROB::solvePathToExit()
 	while (stepsToExit.getFirstNode()->getBlock()->value != 'E')		// Le currentBlock est updaté à la ligne 27 donc ça cause un pop avant la sortie.
 	{																	// On doit aller chercher le premier sur la pile de stepsToExit et voir si la valeur est 'E'
 		currentBlock = stepsToExit.getFirstNode()->getBlock();
-		if (currentBlock->value == 'U')
+		if (canGoUpward(currentBlock))
 		{
 			stepsToExit.push(currentBlock->upBlock);
 			cout << "push up" << endl;							/**********  HINT isoler une variable au lieux de rechercher à chaque tour dans la condition while  *******/
 		}
-		else if (currentBlock->value == 'D')
+		else if (canGoDownward(currentBlock))
 		{
 			stepsToExit.push(currentBlock->downBlock);
 			cout << "push down" << endl;
 		}
-		else if (currentBlock->leftBlock != NULL &&
-			currentBlock->leftBlock->value != '*' &&
-			!currentBlock->leftBlock->visited)
+		else if (canGoLeftward(currentBlock))
 		{
 			stepsToExit.push(currentBlock->leftBlock);
 			cout << "push left" << endl;
 		}
-		else if (currentBlock->rightBlock != NULL &&
-			currentBlock->rightBlock->value != '*' &&
-			!currentBlock->rightBlock->visited)
+		else if (canGoRightward(currentBlock))
 		{
 			stepsToExit.push(currentBlock->rightBlock);
 			cout << "push right" << endl;
 		}
-		else if (currentBlock->frontBlock != NULL &&
-			currentBlock->frontBlock->value != '*' &&
-			!currentBlock->frontBlock->visited)
+		else if (canGoForward(currentBlock))
 		{
 			stepsToExit.push(currentBlock->frontBlock);
 			cout << "push front" << endl;
 		}
-		else if (currentBlock->behindBlock != NULL &&
-			currentBlock->behindBlock->value != '*' &&
-			!currentBlock->behindBlock->visited)
+		else if (canGoBackward(currentBlock))
 		{
 			stepsToExit.push(currentBlock->behindBlock);
 			cout << "push back" << endl;
@@ -120,8 +112,7 @@ void ROB::solveAllPoints(Block* currentBlock)
 			cout << "points added" << endl;
 		}
 
-		if (
-			currentBlock->leftBlock != NULL &&
+		if (currentBlock->leftBlock != NULL &&
 			currentBlock->leftBlock->value != '*' &&
 			!currentBlock->leftBlock->visited) {
 			possibilities.push(currentBlock->leftBlock);
@@ -156,7 +147,6 @@ void ROB::solveAllPoints(Block* currentBlock)
 				allPoints.add(currentBlock);
 				cout << "points added" << endl;
 			}
-
 		}
 		else if (possibilitiesCount > 1)
 		{	
@@ -198,3 +188,60 @@ int ROB::countPile()
 {
 	return possibilities.getNumNodes();
 }
+bool ROB::canGoUpward(Block* currentBlock)
+{
+	if (currentBlock->value == 'U')
+	{
+		return true;
+	}
+	return false;
+}
+bool ROB::canGoDownward(Block* currentBlock)
+{
+	if (currentBlock->value == 'D')
+	{
+		return true;
+	}
+	return false;
+}
+bool ROB::canGoLeftward(Block* currentBlock)
+{
+	if (currentBlock->leftBlock != NULL &&
+		currentBlock->leftBlock->value != '*' &&
+		!currentBlock->leftBlock->visited)
+	{
+		return true;
+	}
+	return false;
+}
+bool ROB::canGoRightward(Block* currentBlock)
+{
+	if (currentBlock->rightBlock != NULL &&
+		currentBlock->rightBlock->value != '*' &&
+		!currentBlock->rightBlock->visited)
+	{
+		return true;
+	}
+	return false;
+}
+bool ROB::canGoForward(Block* currentBlock)
+{
+	if (currentBlock->frontBlock != NULL &&
+		currentBlock->frontBlock->value != '*' &&
+		!currentBlock->frontBlock->visited)
+	{
+		return true;
+	}
+	return false;
+}
+bool ROB::canGoBackward(Block* currentBlock)
+{
+	if (currentBlock->behindBlock != NULL &&
+		currentBlock->behindBlock->value != '*' &&
+		!currentBlock->behindBlock->visited)
+	{
+		return true;
+	}
+	return false;
+}
+	
