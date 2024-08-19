@@ -82,11 +82,11 @@ void ROB::solveAllPoints(Block* currentBlock)
 	//possibilityCount = 0;
 	currentBlock->visited = true;
 	Block* nextBlock = NULL;
-	if (currentBlock->value != 'U' || currentBlock->value != 'D' &&
-		currentBlock->leftBlock->value == '*' || currentBlock->leftBlock->visited &&
-		currentBlock->rightBlock->value == '*' || currentBlock->rightBlock->visited &&
-		currentBlock->frontBlock->value == '*' || currentBlock->frontBlock->visited &&
-		currentBlock->behindBlock->value == '*' || currentBlock->behindBlock->visited)
+	if ((currentBlock->value != 'U' || currentBlock->value != 'D') &&
+		(currentBlock->leftBlock == NULL || currentBlock->leftBlock->value == '*' || currentBlock->leftBlock->visited) &&
+		(currentBlock->rightBlock == NULL || currentBlock->rightBlock->value == '*' || currentBlock->rightBlock->visited) &&
+		(currentBlock->frontBlock == NULL || currentBlock->frontBlock->value == '*' || currentBlock->frontBlock->visited) &&
+		(currentBlock->behindBlock == NULL || currentBlock->behindBlock->value == '*' || currentBlock->behindBlock->visited))
 	{
 		return;
 	}
@@ -94,40 +94,44 @@ void ROB::solveAllPoints(Block* currentBlock)
 	if (currentBlock->points > 0)
 	{
 		allPoints.add(currentBlock);
+		cout << "points added" << endl;
 	}
 
 	if (currentBlock->value == 'U')
 	{
 		currentBlock = currentBlock->upBlock;
+		cout << "moved to upper block" << endl;
 	}
 	else if (currentBlock->value == 'D')
 	{
 		currentBlock = currentBlock->downBlock;
+		cout << "moved to lower block" << endl;
 	}
 	currentBlock->visited = true;
 
 	if (currentBlock->points > 0)
 	{
 		allPoints.add(currentBlock);
+		cout << "points added" << endl;
 	}
 
 	if (currentBlock->leftBlock->value != '*' &&
-		currentBlock->leftBlock->value != 'NULL' &&
+		currentBlock->leftBlock != NULL &&
 		!currentBlock->leftBlock->visited) {
 		possibilities.push(currentBlock->leftBlock);
 	}
 	if (currentBlock->rightBlock->value != '*' &&
-		currentBlock->rightBlock->value != 'NULL' &&
+		currentBlock->rightBlock != NULL &&
 		!currentBlock->rightBlock->visited) {
 		possibilities.push(currentBlock->rightBlock);
 	}
 	if (currentBlock->frontBlock->value != '*' &&
-		currentBlock->frontBlock->value != 'NULL' &&
+		currentBlock->frontBlock != NULL &&
 		!currentBlock->frontBlock->visited) {
 		possibilities.push(currentBlock->frontBlock);
 	}
 	if (currentBlock->behindBlock->value != '*' &&
-		currentBlock->behindBlock->value != 'NULL' &&
+		currentBlock->behindBlock != NULL &&
 		!currentBlock->behindBlock->visited) {
 		possibilities.push(currentBlock->behindBlock);
 	}
@@ -136,9 +140,12 @@ void ROB::solveAllPoints(Block* currentBlock)
 		nextBlock = possibilities.pop();
 		currentBlock = nextBlock;
 		nextBlock->visited = true;
+		cout << "moved to adjacent block" << endl;
+
 		if (nextBlock->points > 0)
 		{
 			allPoints.add(currentBlock);
+			cout << "points added" << endl;
 		}
 
 	}
@@ -146,6 +153,7 @@ void ROB::solveAllPoints(Block* currentBlock)
 		for (int i = 0; i < countPile(); i++) {
 			nextBlock = possibilities.pop();
 			solveAllPoints(nextBlock);
+			cout << "moved to adjacent block" << endl;
 		}
 	}
 }
