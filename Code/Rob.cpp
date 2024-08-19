@@ -91,70 +91,82 @@ void ROB::solveAllPoints(Block* currentBlock)
 		return;
 	}
 
-	if (currentBlock->points > 0)
-	{
-		allPoints.add(currentBlock);
-		cout << "points added" << endl;
-	}
+	int possibilitiesCount = 1;
 
-	if (currentBlock->value == 'U')
+	while (possibilitiesCount == 1)
 	{
-		currentBlock = currentBlock->upBlock;
-		cout << "moved to upper block" << endl;
-	}
-	else if (currentBlock->value == 'D')
-	{
-		currentBlock = currentBlock->downBlock;
-		cout << "moved to lower block" << endl;
-	}
-	currentBlock->visited = true;
 
-	if (currentBlock->points > 0)
-	{
-		allPoints.add(currentBlock);
-		cout << "points added" << endl;
-	}
-
-	if (
-		currentBlock->leftBlock != NULL && 
-		currentBlock->leftBlock->value != '*' &&	
-		!currentBlock->leftBlock->visited) {
-		possibilities.push(currentBlock->leftBlock);
-	}
-	if (currentBlock->rightBlock != NULL && 
-		currentBlock->rightBlock->value != '*' &&		
-		!currentBlock->rightBlock->visited) {
-		possibilities.push(currentBlock->rightBlock);
-	}
-	if (currentBlock->frontBlock != NULL && 
-		currentBlock->frontBlock->value != '*' &&		
-		!currentBlock->frontBlock->visited) {
-		possibilities.push(currentBlock->frontBlock);
-	}
-	if (currentBlock->behindBlock != NULL &&
-		currentBlock->behindBlock->value != '*' &&
-		!currentBlock->behindBlock->visited) {
-		possibilities.push(currentBlock->behindBlock);
-	}
-	if (countPile() == 1)
-	{
-		nextBlock = possibilities.pop();
-		currentBlock = nextBlock;
-		nextBlock->visited = true;
-		cout << "moved to adjacent block" << endl;
-
-		if (nextBlock->points > 0)
+		if (currentBlock->points > 0)
 		{
 			allPoints.add(currentBlock);
 			cout << "points added" << endl;
 		}
 
-	}
-	else if (countPile() > 1) {
-		for (int i = 0; i < countPile(); i++) {
+		if (currentBlock->value == 'U')
+		{
+			currentBlock = currentBlock->upBlock;
+			cout << "moved to upper block" << endl;
+		}
+		else if (currentBlock->value == 'D')
+		{
+			currentBlock = currentBlock->downBlock;
+			cout << "moved to lower block" << endl;
+		}
+		currentBlock->visited = true;
+
+		if (currentBlock->points > 0)
+		{
+			allPoints.add(currentBlock);
+			cout << "points added" << endl;
+		}
+
+		if (
+			currentBlock->leftBlock != NULL &&
+			currentBlock->leftBlock->value != '*' &&
+			!currentBlock->leftBlock->visited) {
+			possibilities.push(currentBlock->leftBlock);
+		}
+		if (currentBlock->rightBlock != NULL &&
+			currentBlock->rightBlock->value != '*' &&
+			!currentBlock->rightBlock->visited) {
+			possibilities.push(currentBlock->rightBlock);
+		}
+		if (currentBlock->frontBlock != NULL &&
+			currentBlock->frontBlock->value != '*' &&
+			!currentBlock->frontBlock->visited) {
+			possibilities.push(currentBlock->frontBlock);
+		}
+		if (currentBlock->behindBlock != NULL &&
+			currentBlock->behindBlock->value != '*' &&
+			!currentBlock->behindBlock->visited) {
+			possibilities.push(currentBlock->behindBlock);
+		}
+
+			possibilitiesCount = countPile();
+
+		if (possibilitiesCount == 1)
+		{
 			nextBlock = possibilities.pop();
-			solveAllPoints(nextBlock);
+			currentBlock = nextBlock;
+			nextBlock->visited = true;
 			cout << "moved to adjacent block" << endl;
+
+			if (nextBlock->points > 0)
+			{
+				allPoints.add(currentBlock);
+				cout << "points added" << endl;
+			}
+
+		}
+		else if (possibilitiesCount > 1)
+		{	
+			for (int i = 0; i < countPile(); i++) 
+			{
+				currentBlock = nextBlock;
+				nextBlock = possibilities.pop();
+				solveAllPoints(nextBlock);
+				cout << "moved to adjacent block" << endl;
+			}
 		}
 	}
 }
