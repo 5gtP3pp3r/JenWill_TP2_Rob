@@ -143,8 +143,6 @@ void ROB::solveAllPoints(Block* currentBlock)
 			solveAllPoints(nextBlock);
 		}
 	}
-
-
 }
 
 /// <summary>
