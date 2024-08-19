@@ -17,11 +17,11 @@ ROB::~ROB()
 /// Permet de trouver le chemin de sortie en utilisant la pile stepsToExit
 /// </summary>
 void ROB::solvePathToExit()
-{	
+{
 	Block* currentBlock = cube->getStartBlock();    // modifié pour voir l'adresse du bloc ici avant de push
 	stepsToExit.push(currentBlock);
 	cout << endl << "push startBlock" << endl;
-	
+
 	while (stepsToExit.getFirstNode()->getBlock()->value != 'E')		// Le currentBlock est updaté à la ligne 27 donc ça cause un pop avant la sortie.
 	{																	// On doit aller chercher le premier sur la pile de stepsToExit et voir si la valeur est 'E'
 		currentBlock = stepsToExit.getFirstNode()->getBlock();
@@ -29,42 +29,42 @@ void ROB::solvePathToExit()
 		{
 			stepsToExit.push(currentBlock->upBlock);
 			cout << "push up" << endl;							/**********  HINT isoler une variable au lieux de rechercher à chaque tour dans la condition while  *******/
-		}									
+		}
 		else if (currentBlock->value == 'D')
 		{
 			stepsToExit.push(currentBlock->downBlock);
 			cout << "push down" << endl;
 		}
-		else if (currentBlock->leftBlock != NULL && 
+		else if (currentBlock->leftBlock != NULL &&
 				 currentBlock->leftBlock->value != '*' &&
-			    !currentBlock->leftBlock->visited)
+				!currentBlock->leftBlock->visited)
 		{
 			stepsToExit.push(currentBlock->leftBlock);
 			cout << "push left" << endl;
 		}
-		else if (currentBlock->rightBlock != NULL && 
+		else if (currentBlock->rightBlock != NULL &&
 				 currentBlock->rightBlock->value != '*' &&
-			    !currentBlock->rightBlock->visited)
+				!currentBlock->rightBlock->visited)
 		{
 			stepsToExit.push(currentBlock->rightBlock);
 			cout << "push right" << endl;
 		}
-		else if (currentBlock->frontBlock != NULL && 
+		else if (currentBlock->frontBlock != NULL &&
 				 currentBlock->frontBlock->value != '*' &&
-			    !currentBlock->frontBlock->visited)
+				!currentBlock->frontBlock->visited)
 		{
 			stepsToExit.push(currentBlock->frontBlock);
 			cout << "push front" << endl;
 		}
-		else if (currentBlock->behindBlock != NULL && 
+		else if (currentBlock->behindBlock != NULL &&
 				 currentBlock->behindBlock->value != '*' &&
-			    !currentBlock->behindBlock->visited)
+				!currentBlock->behindBlock->visited)
 		{
 			stepsToExit.push(currentBlock->behindBlock);
 			cout << "push back" << endl;
 		}
-		else 
-		{			
+		else
+		{
 			stepsToExit.pop();
 			cout << "pop, back to last block" << endl;
 		}
@@ -77,9 +77,29 @@ void ROB::solvePathToExit()
 /// N'oubliez pas de diviser le problème, si le problème n'est pas divisible, appel
 /// récursif est inutile et le robot courant doit continuer son exploration
 /// </summary>
-void ROB::solveAllPoints(Block* startingBlock)
+void ROB::solveAllPoints(Block* currentBlock)
 {
-	/************************************     À COMPLÉTER     **********************************/
+	if (currentBlock->value == 'E')
+	{									// à modifier
+		return;
+	}
+
+	currentBlock->visited = true;
+
+	if (currentBlock->points > 0)
+	{											
+		allPoints.add(currentBlock);
+	}
+
+	if (currentBlock->value == 'U')
+	{
+		solveAllPoints(currentBlock->upBlock);
+	}
+	else if (currentBlock->value == 'D')
+	{                                                      // à modicfier currentBlock == ->
+		solveAllPoints(currentBlock->downBlock);
+	}
+
 }
 
 /// <summary>
