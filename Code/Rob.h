@@ -12,12 +12,12 @@ class ROB
 public:
 	ROB(Cube* _cube);
 	~ROB();
-    void solvePathToExit();    
-	void solveAllPoints(Block * startingBlock);
-	Stack * getSolutionPathToExit();
-	Queue * getSolutionAllPoints() const;
-	
-	
+	void solvePathToExit();
+	void solveAllPoints(Block* startingBlock);
+	Stack* getSolutionPathToExit();
+	Queue* getSolutionAllPoints() const;
+
+
 private:
 	//Pile utilisée pour le calcul du chemin de sortie
 	//Le premier pas vers la sortie sera au fond de la pile
@@ -28,7 +28,7 @@ private:
 	//File utilisée pour l'algorithme de récursivité
 	Queue allPoints;
 	//Le cube reçu en construction pour solutionner les algorithmes
-    Cube * cube = NULL;
+	Cube* cube = NULL;
 	//Pour recursivite possibles.
 	Stack possibilities;
 	//Compte des possibilites
