@@ -244,4 +244,17 @@ bool ROB::canGoBackward(Block* currentBlock)
 	}
 	return false;
 }
+bool ROB::cantGoAnywhere(Block* currentBlock)
+{
+	if (!canGoUpward(currentBlock) &&
+		!canGoDownward(currentBlock) &&
+		!canGoLeftward(currentBlock) &&
+		!canGoRightward(currentBlock) &&
+		!canGoForward(currentBlock) &&
+		!canGoBackward(currentBlock))
+	{
+		return true;
+	}
+	return false;
+}
 	
