@@ -78,7 +78,7 @@ Cube::Cube(string cubePath)
 	}
 	cout << endl << "Start Block coordinates: [ " << startBlock->x << ", " << startBlock->y << ", " << startBlock->z << " ]" << endl;
 	cout << "Start Block value: (" << startBlock->value << ") Start Block points: (" << startBlock->points << ")" << endl;
-	cout << "Start Block address: \"" << *(&startBlock) << "\"" << endl;
+	cout << "Start Block address: \"" << *(&startBlock) << "\"" << endl << endl;
 }		
 													/*******	COMMENTAIRES OUT OF DATE... PROBLÈMES RÉGLÉS	********/
 		/********** On a un trouble de retour NULL à la méthode getStartBlock(). Ajout de plein de cout pour confirmer les index valeurs des attributs et adresses **********/
