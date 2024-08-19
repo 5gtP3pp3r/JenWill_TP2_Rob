@@ -67,7 +67,7 @@ char ConsoleMenu::readValidInput(char tabValidInputs[], int nbElements) const
 }
 
 /// <summary>
-/// Permet d'affichier le menu de l'application à l'utilisateur du programme.
+/// Permet d'afficher le menu de l'application à l'utilisateur du programme.
 /// </summary>
 void ConsoleMenu::displayMenu() const
 {

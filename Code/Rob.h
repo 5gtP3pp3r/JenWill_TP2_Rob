@@ -22,7 +22,7 @@ private:
 	//Pile utilisée pour le calcul du chemin de sortie
 	//Le premier pas vers la sortie sera au fond de la pile
 	Stack stepsToExit;
-	//Pile pour la solution finale qui est la pile de calul renversée
+	//Pile pour la solution finale qui est la pile de calcul renversée
 	//Le premier pas devient au sommet de la pile
 	Stack reversedStepsToExit;
 	//File utilisée pour l'algorithme de récursivité
