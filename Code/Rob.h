@@ -33,6 +33,7 @@ private:
 	Stack possibilities;
 	//Methode pour compter les nodes de la pile de possibilites.
 	int countPile();
+	//Methodes pour verifier les possibilites de deplacements.
 	bool canGoUpward(Block* currentBlock);
 	bool canGoDownward(Block* currentBlock);
 	bool canGoLeftward(Block* currentBlock);
@@ -40,6 +41,5 @@ private:
 	bool canGoForward(Block* currentBlock);
 	bool canGoBackward(Block* currentBlock);
 	bool cantGoAnywhere(Block* currentBlock);
-
 };
 
