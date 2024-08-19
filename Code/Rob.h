@@ -39,6 +39,7 @@ private:
 	bool canGoRightward(Block* currentBlock);
 	bool canGoForward(Block* currentBlock);
 	bool canGoBackward(Block* currentBlock);
+	bool cantGoAnywhere(Block* currentBlock);
 
 };
 
