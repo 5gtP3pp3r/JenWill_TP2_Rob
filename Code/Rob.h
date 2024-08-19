@@ -45,5 +45,7 @@ private:
 	bool cantGoAnywhere(Block* currentBlock);
 	//Methode pour verifier la presence de points et les ajouter.
 	void addPoints(Block* currentBlock);
+	//Methode pour verifier l'attribut "visited" et update au besoin.
+	void visiteBlock(Block* currentBlock);
 };
 
