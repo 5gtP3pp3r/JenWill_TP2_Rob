@@ -35,5 +35,5 @@ private:
 	int possibilityCount;
 	//Methode pour compter les nodes de la pile de possibilites.
 	int countPile();
-}
+};
 
