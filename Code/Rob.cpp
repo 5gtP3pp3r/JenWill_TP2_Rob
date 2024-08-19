@@ -59,7 +59,7 @@ void ROB::solvePathToExit()
 			stepsToExit.pop();
 			cout << "pop, back to last block" << endl;
 		}
-		currentBlock->visited = true;
+		visiteBlock(currentBlock);
 		currentBlock = stepsToExit.getFirstNode()->getBlock();
 	}
 }
@@ -71,9 +71,10 @@ void ROB::solvePathToExit()
 /// </summary>
 void ROB::solveAllPoints(Block* currentBlock)
 {
-	currentBlock->visited = true;
-	addPoints(currentBlock);
 	Block* nextBlock = NULL;
+
+	visiteBlock(currentBlock);
+	addPoints(currentBlock);
 
 	if (cantGoAnywhere(currentBlock))
 	{
@@ -94,7 +95,8 @@ void ROB::solveAllPoints(Block* currentBlock)
 			currentBlock = currentBlock->downBlock;
 			cout << "moved to lower block" << endl;
 		}
-		currentBlock->visited = true;
+
+		visiteBlock(currentBlock);
 		addPoints(currentBlock);
 
 		if (canGoLeftward(currentBlock)) 
@@ -123,9 +125,7 @@ void ROB::solveAllPoints(Block* currentBlock)
 		if (possibilitiesCount == 1)
 		{
 			nextBlock = possibilities.pop();
-			currentBlock = nextBlock;
-			nextBlock->visited = true;
-			cout << "moved to adjacent block" << endl;
+			visiteBlock(nextBlock);
 
 			addPoints(currentBlock);
 		}
@@ -248,5 +248,14 @@ void ROB::addPoints(Block* currentBlock)
 		allPoints.add(currentBlock);
 		cout << currentBlock->value << " points added" << endl;
 	}
+}
+void ROB::visiteBlock(Block* currentBlock)
+{
+	//if (currentBlock != NULL  &&
+	//	!currentBlock->visited)
+	//{
+		currentBlock->visited = true;
+		cout << "moved to adjacent block (visited)" << endl;
+	//}
 }
 	
