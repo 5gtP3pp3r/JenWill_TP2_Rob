@@ -72,6 +72,7 @@ void ROB::solvePathToExit()
 void ROB::solveAllPoints(Block* currentBlock)
 {
 	currentBlock->visited = true;
+	addPoints(currentBlock);
 	Block* nextBlock = NULL;
 
 	if (cantGoAnywhere(currentBlock))
@@ -83,13 +84,6 @@ void ROB::solveAllPoints(Block* currentBlock)
 
 	while (possibilitiesCount == 1)
 	{
-
-		if (currentBlock->points > 0)
-		{
-			allPoints.add(currentBlock);
-			cout << "points added" << endl;
-		}
-
 		if (canGoUpward(currentBlock))
 		{
 			currentBlock = currentBlock->upBlock;
@@ -101,28 +95,27 @@ void ROB::solveAllPoints(Block* currentBlock)
 			cout << "moved to lower block" << endl;
 		}
 		currentBlock->visited = true;
-
-		if (currentBlock->points > 0)
-		{
-			allPoints.add(currentBlock);
-			cout << "points added" << endl;
-		}
+		addPoints(currentBlock);
 
 		if (canGoLeftward(currentBlock)) 
 		{
 			possibilities.push(currentBlock->leftBlock);
+			cout << "Moved to left block" << endl;
 		}
 		if (canGoRightward(currentBlock)) 
 		{
 			possibilities.push(currentBlock->rightBlock);
+			cout << "Moved to right block" << endl;
 		}
 		if (canGoForward(currentBlock))
 		{
 			possibilities.push(currentBlock->frontBlock);
+			cout << "Moved to front block" << endl;
 		}
 		if (canGoBackward(currentBlock))
 		{
 			possibilities.push(currentBlock->behindBlock);
+			cout << "Moved to back block" << endl;
 		}
 
 			possibilitiesCount = countPile();
@@ -134,11 +127,7 @@ void ROB::solveAllPoints(Block* currentBlock)
 			nextBlock->visited = true;
 			cout << "moved to adjacent block" << endl;
 
-			if (nextBlock->points > 0)
-			{
-				allPoints.add(currentBlock);
-				cout << "points added" << endl;
-			}			
+			addPoints(currentBlock);
 		}
 		else if (possibilitiesCount > 1)
 		{	
@@ -150,7 +139,7 @@ void ROB::solveAllPoints(Block* currentBlock)
 				cout << "moved to adjacent block" << endl;
 			}
 		}
-		possibilitiesCount = countPile();
+		possibilitiesCount = 1;
 	}
 }
 
@@ -183,7 +172,8 @@ int ROB::countPile()
 }
 bool ROB::canGoUpward(Block* currentBlock)
 {
-	if (currentBlock->value == 'U')
+	if (currentBlock != NULL && 
+		currentBlock->value == 'U')
 	{
 		return true;
 	}
@@ -191,7 +181,8 @@ bool ROB::canGoUpward(Block* currentBlock)
 }
 bool ROB::canGoDownward(Block* currentBlock)
 {
-	if (currentBlock->value == 'D')
+	if (currentBlock != NULL && 
+		currentBlock->value == 'D')
 	{
 		return true;
 	}
@@ -249,5 +240,13 @@ bool ROB::cantGoAnywhere(Block* currentBlock)
 		return true;
 	}
 	return false;
+}
+void ROB::addPoints(Block* currentBlock)
+{
+	if (currentBlock->points > 0)
+	{
+		allPoints.add(currentBlock);
+		cout << currentBlock->value << " points added" << endl;
+	}
 }
 	
