@@ -43,5 +43,7 @@ private:
 	bool canGoForward(Block* currentBlock);
 	bool canGoBackward(Block* currentBlock);
 	bool cantGoAnywhere(Block* currentBlock);
+	//Methode pour verifier la presence de points et les ajouter.
+	void addPoints(Block* currentBlock);
 };
 
