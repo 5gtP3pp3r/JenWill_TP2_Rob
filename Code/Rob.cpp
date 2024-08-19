@@ -22,9 +22,8 @@ void ROB::solvePathToExit()
 	stepsToExit.push(currentBlock);
 	cout << endl << "push startBlock" << endl;
 
-	while (stepsToExit.getFirstNode()->getBlock()->value != 'E')		// Le currentBlock est updaté à la ligne 27 donc ça cause un pop avant la sortie.
+	while (currentBlock->value != 'E')		// Le currentBlock est updaté à la ligne 27 donc ça cause un pop avant la sortie.
 	{																	// On doit aller chercher le premier sur la pile de stepsToExit et voir si la valeur est 'E'
-		currentBlock = stepsToExit.getFirstNode()->getBlock();
 		if (canGoUpward(currentBlock))
 		{
 			stepsToExit.push(currentBlock->upBlock);
@@ -61,6 +60,7 @@ void ROB::solvePathToExit()
 			cout << "pop, back to last block" << endl;
 		}
 		currentBlock->visited = true;
+		currentBlock = stepsToExit.getFirstNode()->getBlock();
 	}
 }
 
