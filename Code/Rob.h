@@ -29,8 +29,10 @@ private:
 	Queue allPoints;
 	//Le cube reçu en construction pour solutionner les algorithmes
 	Cube* cube = NULL;
-	//Pour recursivite possibles.
+	//Queue pour conserver les possibilites (blocs de déplacements possibles).
 	Stack possibilities;
+	//Attribut pour conserver le nombre de possibilites.
+	int possibilitiesCount;
 	//Methode pour compter les nodes de la pile de possibilites.
 	int countPile();
 	//Methodes pour verifier les possibilites de deplacements.
