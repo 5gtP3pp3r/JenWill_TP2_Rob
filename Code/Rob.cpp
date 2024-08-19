@@ -79,7 +79,7 @@ void ROB::solvePathToExit()
 /// </summary>
 void ROB::solveAllPoints(Block* currentBlock)
 {
-	possibilityCount = 0;
+	//possibilityCount = 0;
 	currentBlock->visited = true;
 	Block* nextBlock = NULL;
 	if (currentBlock->value != 'U' || currentBlock->value != 'D' &&
@@ -136,6 +136,11 @@ void ROB::solveAllPoints(Block* currentBlock)
 		nextBlock = possibilities.pop();
 		currentBlock = nextBlock;
 		nextBlock->visited = true;
+		if (nextBlock->points > 0)
+		{
+			allPoints.add(currentBlock);
+		}
+
 	}
 	else if (countPile() > 1) {
 		for (int i = 0; i < countPile(); i++) {
