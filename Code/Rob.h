@@ -33,5 +33,12 @@ private:
 	Stack possibilities;
 	//Methode pour compter les nodes de la pile de possibilites.
 	int countPile();
+	bool canGoUpward(Block* currentBlock);
+	bool canGoDownward(Block* currentBlock);
+	bool canGoLeftward(Block* currentBlock);
+	bool canGoRightward(Block* currentBlock);
+	bool canGoForward(Block* currentBlock);
+	bool canGoBackward(Block* currentBlock);
+
 };
 
