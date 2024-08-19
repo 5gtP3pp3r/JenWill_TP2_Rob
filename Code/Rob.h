@@ -31,8 +31,6 @@ private:
 	Cube* cube = NULL;
 	//Pour recursivite possibles.
 	Stack possibilities;
-	//Compte des possibilites
-	int possibilityCount;
 	//Methode pour compter les nodes de la pile de possibilites.
 	int countPile();
 };

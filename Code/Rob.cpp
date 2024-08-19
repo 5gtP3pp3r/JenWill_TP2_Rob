@@ -79,9 +79,9 @@ void ROB::solvePathToExit()
 /// </summary>
 void ROB::solveAllPoints(Block* currentBlock)
 {
-	//possibilityCount = 0;
 	currentBlock->visited = true;
 	Block* nextBlock = NULL;
+
 	if ((currentBlock->value != 'U' || currentBlock->value != 'D') &&
 		(currentBlock->leftBlock == NULL || currentBlock->leftBlock->value == '*' || currentBlock->leftBlock->visited) &&
 		(currentBlock->rightBlock == NULL || currentBlock->rightBlock->value == '*' || currentBlock->rightBlock->visited) &&
