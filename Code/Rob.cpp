@@ -115,23 +115,24 @@ void ROB::solveAllPoints(Block* currentBlock)
 		cout << "points added" << endl;
 	}
 
-	if (currentBlock->leftBlock->value != '*' &&
-		currentBlock->leftBlock != NULL &&
+	if (
+		currentBlock->leftBlock != NULL && 
+		currentBlock->leftBlock->value != '*' &&	
 		!currentBlock->leftBlock->visited) {
 		possibilities.push(currentBlock->leftBlock);
 	}
-	if (currentBlock->rightBlock->value != '*' &&
-		currentBlock->rightBlock != NULL &&
+	if (currentBlock->rightBlock != NULL && 
+		currentBlock->rightBlock->value != '*' &&		
 		!currentBlock->rightBlock->visited) {
 		possibilities.push(currentBlock->rightBlock);
 	}
-	if (currentBlock->frontBlock->value != '*' &&
-		currentBlock->frontBlock != NULL &&
+	if (currentBlock->frontBlock != NULL && 
+		currentBlock->frontBlock->value != '*' &&		
 		!currentBlock->frontBlock->visited) {
 		possibilities.push(currentBlock->frontBlock);
 	}
-	if (currentBlock->behindBlock->value != '*' &&
-		currentBlock->behindBlock != NULL &&
+	if (currentBlock->behindBlock != NULL &&
+		currentBlock->behindBlock->value != '*' &&
 		!currentBlock->behindBlock->visited) {
 		possibilities.push(currentBlock->behindBlock);
 	}
