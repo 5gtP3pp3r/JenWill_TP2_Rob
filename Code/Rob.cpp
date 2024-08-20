@@ -71,75 +71,49 @@ void ROB::solvePathToExit()
 /// </summary>
 void ROB::solveAllPoints(Block* currentBlock)
 {
-	Block* nextBlock = NULL;
-
-	visiteBlock(currentBlock);
-	addPoints(currentBlock);
-
 	if (cantGoAnywhere(currentBlock))
 	{
 		return;
 	}
 
-	possibilitiesCount = 1;
-
-	while (possibilitiesCount == 1)
+	if (canGoUpward(currentBlock))
 	{
-		if (canGoUpward(currentBlock))
-		{
-			currentBlock = currentBlock->upBlock;
-			cout << "moved to upper block" << endl;
-		}
-		else if (canGoDownward(currentBlock))
-		{
-			currentBlock = currentBlock->downBlock;
-			cout << "moved to lower block" << endl;
-		}
+		currentBlock = currentBlock->upBlock;		
+		cout << "moved to upper block" << endl;
+	}
+	else if (canGoDownward(currentBlock))
+	{
+		currentBlock = currentBlock->downBlock;		
+		cout << "moved to lower block" << endl;
+	}
+	addPoints(currentBlock);
+	visiteBlock(currentBlock);
+	
+	searchForWays(currentBlock);
+	possibilitiesCount = countPile();
 
-		visiteBlock(currentBlock);
-		addPoints(currentBlock);
-
-		if (canGoLeftward(currentBlock)) 
-		{
-			possibilities.push(currentBlock->leftBlock);
-			cout << "Moved to left block" << endl;
-		}
-		if (canGoRightward(currentBlock)) 
-		{
-			possibilities.push(currentBlock->rightBlock);
-			cout << "Moved to right block" << endl;
-		}
-		if (canGoForward(currentBlock))
-		{
-			possibilities.push(currentBlock->frontBlock);
-			cout << "Moved to front block" << endl;
-		}
-		if (canGoBackward(currentBlock))
-		{
-			possibilities.push(currentBlock->behindBlock);
-			cout << "Moved to back block" << endl;
-		}
-
-			possibilitiesCount = countPile();
-
+	while (possibilitiesCount > 0)
+	{
 		if (possibilitiesCount == 1)
 		{
-			nextBlock = possibilities.pop();
-			visiteBlock(nextBlock);
-
+			currentBlock = possibilities.pop();
 			addPoints(currentBlock);
+			visiteBlock(currentBlock);	
+			cout << "Single posibility move" << endl;
 		}
 		else if (possibilitiesCount > 1)
-		{	
-			for (int i = 0; i < countPile(); i++) 
+		{
+			for (int i = 0; i < possibilitiesCount; i++)
 			{
-				currentBlock = nextBlock;
-				nextBlock = possibilities.pop();
-				solveAllPoints(nextBlock);
-				cout << "moved to adjacent block" << endl;
+				currentBlock = possibilities.pop();
+				addPoints(currentBlock);
+				visiteBlock(currentBlock);				
+				solveAllPoints(currentBlock);
+				cout << "Recursively moved to next block." << endl;
 			}
 		}
-		possibilitiesCount = 1;
+		searchForWays(currentBlock);
+		possibilitiesCount = countPile();
 	}
 }
 
@@ -172,8 +146,9 @@ int ROB::countPile()
 }
 bool ROB::canGoUpward(Block* currentBlock)
 {
-	if (currentBlock != NULL && 
-		currentBlock->value == 'U')
+	if (currentBlock != NULL &&
+		currentBlock->value == 'U' &&
+		!currentBlock->upBlock->visited)
 	{
 		return true;
 	}
@@ -181,8 +156,9 @@ bool ROB::canGoUpward(Block* currentBlock)
 }
 bool ROB::canGoDownward(Block* currentBlock)
 {
-	if (currentBlock != NULL && 
-		currentBlock->value == 'D')
+	if (currentBlock != NULL &&
+		currentBlock->value == 'D' &&
+		!currentBlock->downBlock->visited)
 	{
 		return true;
 	}
@@ -243,19 +219,54 @@ bool ROB::cantGoAnywhere(Block* currentBlock)
 }
 void ROB::addPoints(Block* currentBlock)
 {
-	if (currentBlock->points > 0)
+	if (currentBlock->points > 0 &&
+		!currentBlock->visited)
 	{
 		allPoints.add(currentBlock);
-		cout << currentBlock->value << " points added" << endl;
+		cout << currentBlock->points << " points added" << endl;
 	}
 }
 void ROB::visiteBlock(Block* currentBlock)
 {
-	//if (currentBlock != NULL  &&
-	//	!currentBlock->visited)
-	//{
+	if (!currentBlock->visited)
+	{
 		currentBlock->visited = true;
-		cout << "moved to adjacent block (visited)" << endl;
-	//}
+		cout << "moved to next block (visited)" << endl;
+	}
 }
-	
+void ROB::searchForWays(Block* currentBlock)
+{
+	if (canGoUpward(currentBlock))
+	{
+		currentBlock = currentBlock->upBlock;
+		cout << "moved to upper block" << endl;
+	}
+	else if (canGoDownward(currentBlock))
+	{
+		currentBlock = currentBlock->downBlock;
+		cout << "moved to lower block" << endl;
+	}
+	else
+	{
+		if (canGoLeftward(currentBlock))
+		{
+			possibilities.push(currentBlock->leftBlock);
+			cout << "Can move to left Block" << endl;
+		}
+		if (canGoRightward(currentBlock))
+		{
+			possibilities.push(currentBlock->rightBlock);
+			cout << "Can move to right Block" << endl;
+		}
+		if (canGoForward(currentBlock))
+		{
+			possibilities.push(currentBlock->frontBlock);;
+			cout << "Can move to front Block" << endl;
+		}
+		if (canGoBackward(currentBlock))
+		{
+			possibilities.push(currentBlock->behindBlock);
+			cout << "Can move to Back Block" << endl;
+		}
+	}
+}
