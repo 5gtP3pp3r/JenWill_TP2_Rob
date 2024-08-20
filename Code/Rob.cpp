@@ -96,10 +96,9 @@ void ROB::solveAllPoints(Block* currentBlock)
 	{
 		if (possibilitiesCount == 1)
 		{
-			currentBlock = possibilities.pop();
+			currentBlock = possibilities.pop();			
 			addPoints(currentBlock);
 			visiteBlock(currentBlock);	
-			cout << "Single posibility move" << endl;
 		}
 		else if (possibilitiesCount > 1)
 		{
@@ -231,7 +230,7 @@ void ROB::visiteBlock(Block* currentBlock)
 	if (!currentBlock->visited)
 	{
 		currentBlock->visited = true;
-		cout << "moved to next block (visited)" << endl;
+		cout << "Block visited" << endl;
 	}
 }
 void ROB::searchForWays(Block* currentBlock)
@@ -239,12 +238,12 @@ void ROB::searchForWays(Block* currentBlock)
 	if (canGoUpward(currentBlock))
 	{
 		currentBlock = currentBlock->upBlock;
-		cout << "moved to upper block" << endl;
+		cout << "Can move to upper block" << endl;
 	}
 	else if (canGoDownward(currentBlock))
 	{
 		currentBlock = currentBlock->downBlock;
-		cout << "moved to lower block" << endl;
+		cout << "Can move to lower block" << endl;
 	}
 	else
 	{
