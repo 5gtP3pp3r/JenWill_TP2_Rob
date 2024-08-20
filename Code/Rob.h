@@ -47,5 +47,6 @@ private:
 	void addPoints(Block* currentBlock);
 	//Methode pour verifier l'attribut "visited" et update au besoin.
 	void visiteBlock(Block* currentBlock);
+	void searchForWays(Block* currentBlock);
 };
 
