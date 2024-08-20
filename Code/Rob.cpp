@@ -18,16 +18,16 @@ ROB::~ROB()
 /// </summary>
 void ROB::solvePathToExit()
 {
-	Block* currentBlock = cube->getStartBlock();    // modifié pour voir l'adresse du bloc ici avant de push
+	Block* currentBlock = cube->getStartBlock();						
 	stepsToExit.push(currentBlock);
 	cout << endl << "push startBlock" << endl;
 
-	while (currentBlock->value != 'E')		// Le currentBlock est updaté à la ligne 27 donc ça cause un pop avant la sortie.
-	{																	// On doit aller chercher le premier sur la pile de stepsToExit et voir si la valeur est 'E'
+	while (currentBlock->value != 'E')									
+	{																	
 		if (canGoUpward(currentBlock))
 		{
 			stepsToExit.push(currentBlock->upBlock);
-			cout << "push up" << endl;							/**********  HINT isoler une variable au lieux de rechercher à chaque tour dans la condition while  *******/
+			cout << "push up" << endl;							
 		}
 		else if (canGoDownward(currentBlock))
 		{
