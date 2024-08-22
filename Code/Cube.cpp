@@ -135,8 +135,8 @@ void Cube::chainLinkBlocks(Block* currentBlock, int x, int y, int z)
 	}
 	if (y < DIMENSION - 1)
 	{
-		currentBlock->behindBlock = tabBlocks[x][y + 1][z];
-		tabBlocks[x][y + 1][z]->frontBlock = currentBlock;
+		currentBlock->frontBlock = tabBlocks[x][y + 1][z];
+		tabBlocks[x][y + 1][z]->behindBlock = currentBlock;
 	}
 	if (z > 0)
 	{
