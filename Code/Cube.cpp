@@ -16,8 +16,8 @@ Cube::Cube(string cubePath)
 
 	if (streamInput)
 	{
-		int y = 0;
-		int z = -1;														// Le fichier .txt commence par un "+" ce qui fok le premier incrément de "z" à la ligne 25
+		int y = DIMENSION - 1;											// Placer "y" en haut des lignes pour le décrémenter et avoir l'axe Y dans le même sense que les .txt.
+		int z = -1;														// Le fichier .txt commence par un "+" ce qui fok le premier incrément de "z" à la ligne 25.
 		while (getline(streamInput, currentLine))
 		{
 			if (currentLine == "+")
@@ -31,46 +31,18 @@ Cube::Cube(string cubePath)
 				for (int x = 0; x < DIMENSION; x++)
 				{
 					tabBlocks[x][y][z] = new Block;						// Instanciation de tout les blocs à chaque index et non une seule fois.. oups lol
+
 					cout << "Tab position: [" << x << ", " << y << ", " << z << "]" << endl;
 					cout << "Tab address: \"" << *(&tabBlocks[x][y][z]) << "\"" << endl;
-					currentBlock = tabBlocks[x][y][z];					// Attribution d'adresse et non des valeurs x, y, z     encore oups
-					currentBlock->x = x;								// Attribution des valeurs x, y, z
-					currentBlock->y = y;
-					currentBlock->z = z;
+					
+					currentBlock = initCurrentBlock(currentBlock, x, y, z);
+
 					cout << "Block coordinates: [ " << currentBlock->x << ", " << currentBlock->y << ", " << currentBlock->z << " ]" << endl;
 					cout << "Block address: \"" << *(&currentBlock) << "\"" << endl ;
 
-					if (isdigit(currentLine[x])) {
-						currentBlock->points = currentLine[x] - '0';	// Remarqué qu'on doit additionner des int plus tard, transfert du char du .txt en int  
-						currentBlock->value = ' ';
-					}
-					else {
-						currentBlock->points = 0;
-						currentBlock->value = currentLine[x];
-					}
-					cout << "Block value: (" << currentBlock->value << ") Block points: (" << currentBlock->points << ")" << endl << endl;
-					// currentBlock->value = currentLine[x];   en trop
-
-					if (currentLine[x] == 'S')
-					{
-						startBlock = currentBlock;
-					}
-
-					if (x > 0)
-					{
-						currentBlock->leftBlock = tabBlocks[x - 1][y][z];
-						tabBlocks[x - 1][y][z]->rightBlock = currentBlock;
-					}
-					if (y < DIMENSION -1)
-					{
-						currentBlock->behindBlock = tabBlocks[x][y + 1][z];
-						tabBlocks[x][y + 1][z]->frontBlock = currentBlock;
-					}
-					if (z > 0)
-					{
-						currentBlock->downBlock = tabBlocks[x][y][z - 1];
-						tabBlocks[x][y][z - 1]->upBlock = currentBlock;
-					}
+					initBlockValuesAndPoints(currentBlock, currentLine, x);
+					initStartBlock(currentBlock, currentLine, x);					
+					chainLinkBlocks(currentBlock, x, y, z);
 				}
 				y--;
 			}
@@ -120,5 +92,55 @@ void Cube::resetAllVisitedBlocksToFalse()
 				}
 			}
 		}
+	}
+}
+
+Block* Cube::initCurrentBlock(Block* currentBlock, int x, int y, int z)
+{
+	currentBlock = tabBlocks[x][y][z];					// Attribution d'adresse et non des valeurs x, y, z     encore oups
+	currentBlock->x = x;								// Attribution des valeurs x, y, z
+	currentBlock->y = y;
+	currentBlock->z = z;
+
+	return currentBlock;
+}
+
+void Cube::initBlockValuesAndPoints(Block* currentBlock, string currentLine, int x)
+{
+	if (isdigit(currentLine[x])) {
+		currentBlock->points = currentLine[x] - '0';	// Remarqué qu'on doit additionner des int plus tard, transfert du char du .txt en int  
+		currentBlock->value = ' ';
+	}
+	else {
+		currentBlock->points = 0;
+		currentBlock->value = currentLine[x];
+	}
+	cout << "Block value: (" << currentBlock->value << ") Block points: (" << currentBlock->points << ")" << endl << endl;
+}
+
+void Cube::initStartBlock(Block* currentBlock, string currentLine, int x)
+{
+	if (currentLine[x] == 'S')
+	{
+		startBlock = currentBlock;
+	}
+}
+
+void Cube::chainLinkBlocks(Block* currentBlock, int x, int y, int z)
+{
+	if (x > 0)
+	{
+		currentBlock->leftBlock = tabBlocks[x - 1][y][z];
+		tabBlocks[x - 1][y][z]->rightBlock = currentBlock;
+	}
+	if (y < DIMENSION - 1)
+	{
+		currentBlock->behindBlock = tabBlocks[x][y + 1][z];
+		tabBlocks[x][y + 1][z]->frontBlock = currentBlock;
+	}
+	if (z > 0)
+	{
+		currentBlock->downBlock = tabBlocks[x][y][z - 1];
+		tabBlocks[x][y][z - 1]->upBlock = currentBlock;
 	}
 }
