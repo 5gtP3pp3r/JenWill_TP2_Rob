@@ -29,7 +29,7 @@ private:
 	Queue allPoints;
 	//Le cube reçu en construction pour solutionner les algorithmes
 	Cube* cube = NULL;
-	//Queue pour conserver les possibilites (blocs de déplacements possibles).
+	//Pile pour conserver les possibilites (blocs de déplacements possibles).
 	Stack possibilities;
 	//Attribut pour conserver le nombre de possibilites.
 	int possibilitiesCount;
