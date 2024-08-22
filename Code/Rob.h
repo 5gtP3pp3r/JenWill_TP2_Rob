@@ -29,13 +29,15 @@ private:
 	Queue allPoints;
 	//Le cube reçu en construction pour solutionner les algorithmes
 	Cube* cube = NULL;
-	//Pile pour conserver les possibilites (blocs de déplacements possibles).
+
+	/*******   Attributs et méthodes PRIVÉ ajoutés   *******/
+	//Pile pour conserver les possibilités (blocs de déplacements possibles).
 	Stack possibilities;
-	//Attribut pour conserver le nombre de possibilites.
+	//Attribut pour conserver le nombre de possibilités.
 	int possibilitiesCount;
-	//Methode pour compter les nodes de la pile de possibilites.
+	//Méthode pour compter les nodes de la pile de possibilités.
 	int countPile();
-	//Methodes pour verifier les possibilites de deplacements.
+	//Méthodes pour verifier les possibilités de déplacements.
 	bool canGoUpward(Block* currentBlock);
 	bool canGoDownward(Block* currentBlock);
 	bool canGoLeftward(Block* currentBlock);
@@ -43,10 +45,11 @@ private:
 	bool canGoForward(Block* currentBlock);
 	bool canGoBackward(Block* currentBlock);
 	bool cantGoAnywhere(Block* currentBlock);
-	//Methode pour verifier la presence de points et les ajouter.
+	//Méthode pour verifier la presence de points et les ajouter.
 	void addPoints(Block* currentBlock);
-	//Methode pour verifier l'attribut "visited" et update au besoin.
+	//Méthode pour verifier l'attribut "visited" et update au besoin.
 	void visiteBlock(Block* currentBlock);
+	//Méthode pour chercher les chemins possibles.
 	void searchForWays(Block* currentBlock);
 };
 
