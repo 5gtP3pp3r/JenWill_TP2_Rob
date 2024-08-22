@@ -71,7 +71,7 @@ void ROB::solvePathToExit()
 /// </summary>
 void ROB::solveAllPoints(Block* currentBlock)
 {
-	if (cantGoAnywhere(currentBlock))
+	if (cantGoAnywhere(currentBlock)) 
 	{
 		return;
 	}
@@ -109,7 +109,7 @@ void ROB::solveAllPoints(Block* currentBlock)
 				visiteBlock(currentBlock);				
 				solveAllPoints(currentBlock);
 				cout << "Recursively moved to next block." << endl;
-			}
+			}			
 		}
 		searchForWays(currentBlock);
 		possibilitiesCount = countPile();

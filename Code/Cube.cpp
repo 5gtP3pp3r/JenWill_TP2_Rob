@@ -23,7 +23,7 @@ Cube::Cube(string cubePath)
 			if (currentLine == "+")
 			{
 				z++;
-				y = 0;
+				y = DIMENSION -1;
 			}
 			else
 			{
@@ -55,35 +55,36 @@ Cube::Cube(string cubePath)
 					{
 						startBlock = currentBlock;
 					}
-					if (x != 0)
+
+					if (x > 0)
 					{
 						currentBlock->leftBlock = tabBlocks[x - 1][y][z];
 						tabBlocks[x - 1][y][z]->rightBlock = currentBlock;
 					}
-					if (y != 0)
+					if (y < DIMENSION -1)
 					{
-						currentBlock->behindBlock = tabBlocks[x][y - 1][z];
-						tabBlocks[x][y - 1][z]->frontBlock = currentBlock;
+						currentBlock->behindBlock = tabBlocks[x][y + 1][z];
+						tabBlocks[x][y + 1][z]->frontBlock = currentBlock;
 					}
-					if (z != 0)
+					if (z > 0)
 					{
 						currentBlock->downBlock = tabBlocks[x][y][z - 1];
 						tabBlocks[x][y][z - 1]->upBlock = currentBlock;
 					}
 				}
-				y++;
-			}		
+				y--;
+			}
 		}
 		streamInput.close();
 	}
 	cout << endl << "Start Block coordinates: [ " << startBlock->x << ", " << startBlock->y << ", " << startBlock->z << " ]" << endl;
 	cout << "Start Block value: (" << startBlock->value << ") Start Block points: (" << startBlock->points << ")" << endl;
 	cout << "Start Block address: \"" << *(&startBlock) << "\"" << endl << endl;
-}		
-													/*******	COMMENTAIRES OUT OF DATE... PROBLÈMES RÉGLÉS	********/
-		/********** On a un trouble de retour NULL à la méthode getStartBlock(). Ajout de plein de cout pour confirmer les index valeurs des attributs et adresses **********/
-		/******* Les affichage montre bien que les adresses et que les transferts d'adresses entre les positions du tableau, des blocks et même de startBlock suivent *******/
-		/******* Le problème doit venir au moment d'appeler la méthode getStartBlock() dans Rob et sont utilisation ou autre *******/
+}
+/*******	COMMENTAIRES OUT OF DATE... PROBLÈMES RÉGLÉS	********/
+/********** On a un trouble de retour NULL à la méthode getStartBlock(). Ajout de plein de cout pour confirmer les index valeurs des attributs et adresses **********/
+/******* Les affichage montre bien que les adresses et que les transferts d'adresses entre les positions du tableau, des blocks et même de startBlock suivent *******/
+/******* Le problème doit venir au moment d'appeler la méthode getStartBlock() dans Rob et sont utilisation ou autre *******/
 
 Cube::~Cube()
 {
