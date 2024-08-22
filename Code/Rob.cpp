@@ -130,6 +130,7 @@ int ROB::countPile()
 {
 	return possibilities.getNumNodes();
 }
+
 bool ROB::canGoUpward(Block* currentBlock)
 {
 	if (currentBlock != NULL &&
@@ -140,6 +141,7 @@ bool ROB::canGoUpward(Block* currentBlock)
 	}
 	return false;
 }
+
 bool ROB::canGoDownward(Block* currentBlock)
 {
 	if (currentBlock != NULL &&
@@ -150,6 +152,7 @@ bool ROB::canGoDownward(Block* currentBlock)
 	}
 	return false;
 }
+
 bool ROB::canGoLeftward(Block* currentBlock)
 {
 	if (currentBlock->leftBlock != NULL &&
@@ -160,6 +163,7 @@ bool ROB::canGoLeftward(Block* currentBlock)
 	}
 	return false;
 }
+
 bool ROB::canGoRightward(Block* currentBlock)
 {
 	if (currentBlock->rightBlock != NULL &&
@@ -170,6 +174,7 @@ bool ROB::canGoRightward(Block* currentBlock)
 	}
 	return false;
 }
+
 bool ROB::canGoForward(Block* currentBlock)
 {
 	if (currentBlock->frontBlock != NULL &&
@@ -180,6 +185,7 @@ bool ROB::canGoForward(Block* currentBlock)
 	}
 	return false;
 }
+
 bool ROB::canGoBackward(Block* currentBlock)
 {
 	if (currentBlock->behindBlock != NULL &&
@@ -190,6 +196,7 @@ bool ROB::canGoBackward(Block* currentBlock)
 	}
 	return false;
 }
+
 bool ROB::cantGoAnywhere(Block* currentBlock)
 {
 	if (!canGoUpward(currentBlock) &&
@@ -203,6 +210,7 @@ bool ROB::cantGoAnywhere(Block* currentBlock)
 	}
 	return false;
 }
+
 void ROB::addPoints(Block* currentBlock)
 {
 	if (currentBlock->points > 0 &&
@@ -212,6 +220,7 @@ void ROB::addPoints(Block* currentBlock)
 		cout << currentBlock->points << " points added" << endl;
 	}
 }
+
 void ROB::visiteBlock(Block* currentBlock)
 {
 	if (!currentBlock->visited)
@@ -220,6 +229,7 @@ void ROB::visiteBlock(Block* currentBlock)
 		cout << "Block visited" << endl;
 	}
 }
+
 void ROB::searchForWays(Block* currentBlock)
 {
 	if (canGoUpward(currentBlock))
