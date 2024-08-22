@@ -18,16 +18,16 @@ ROB::~ROB()
 /// </summary>
 void ROB::solvePathToExit()
 {
-	Block* currentBlock = cube->getStartBlock();						
+	Block* currentBlock = cube->getStartBlock();
 	stepsToExit.push(currentBlock);
 	cout << endl << "push startBlock" << endl;
 
-	while (currentBlock->value != 'E')									
-	{																	
+	while (currentBlock->value != 'E')
+	{
 		if (canGoUpward(currentBlock))
 		{
 			stepsToExit.push(currentBlock->upBlock);
-			cout << "push up" << endl;							
+			cout << "push up" << endl;
 		}
 		else if (canGoDownward(currentBlock))
 		{
@@ -71,24 +71,11 @@ void ROB::solvePathToExit()
 /// </summary>
 void ROB::solveAllPoints(Block* currentBlock)
 {
-	if (cantGoAnywhere(currentBlock)) 
+	if (cantGoAnywhere(currentBlock))
 	{
 		return;
 	}
 
-	if (canGoUpward(currentBlock))
-	{
-		currentBlock = currentBlock->upBlock;		
-		cout << "moved to upper block" << endl;
-	}
-	else if (canGoDownward(currentBlock))
-	{
-		currentBlock = currentBlock->downBlock;		
-		cout << "moved to lower block" << endl;
-	}
-	addPoints(currentBlock);
-	visiteBlock(currentBlock);
-	
 	searchForWays(currentBlock);
 	possibilitiesCount = countPile();
 
@@ -96,9 +83,9 @@ void ROB::solveAllPoints(Block* currentBlock)
 	{
 		if (possibilitiesCount == 1)
 		{
-			currentBlock = possibilities.pop();			
+			currentBlock = possibilities.pop();
 			addPoints(currentBlock);
-			visiteBlock(currentBlock);	
+			visiteBlock(currentBlock);
 		}
 		else if (possibilitiesCount > 1)
 		{
@@ -106,10 +93,10 @@ void ROB::solveAllPoints(Block* currentBlock)
 			{
 				currentBlock = possibilities.pop();
 				addPoints(currentBlock);
-				visiteBlock(currentBlock);				
+				visiteBlock(currentBlock);
 				solveAllPoints(currentBlock);
 				cout << "Recursively moved to next block." << endl;
-			}			
+			}
 		}
 		searchForWays(currentBlock);
 		possibilitiesCount = countPile();
@@ -125,8 +112,8 @@ void ROB::solveAllPoints(Block* currentBlock)
 
 Stack* ROB::getSolutionPathToExit()
 {
-	while (stepsToExit.getFirstNode() != NULL)							
-	{																	
+	while (stepsToExit.getFirstNode() != NULL)
+	{
 		reversedStepsToExit.push(stepsToExit.pop());
 	}
 
@@ -240,32 +227,29 @@ void ROB::searchForWays(Block* currentBlock)
 		currentBlock = currentBlock->upBlock;
 		cout << "Can move to upper block" << endl;
 	}
-	else if (canGoDownward(currentBlock))
+	if (canGoDownward(currentBlock))
 	{
 		currentBlock = currentBlock->downBlock;
 		cout << "Can move to lower block" << endl;
 	}
-	else
+	if (canGoLeftward(currentBlock))
 	{
-		if (canGoLeftward(currentBlock))
-		{
-			possibilities.push(currentBlock->leftBlock);
-			cout << "Can move to left Block" << endl;
-		}
-		if (canGoRightward(currentBlock))
-		{
-			possibilities.push(currentBlock->rightBlock);
-			cout << "Can move to right Block" << endl;
-		}
-		if (canGoForward(currentBlock))
-		{
-			possibilities.push(currentBlock->frontBlock);;
-			cout << "Can move to front Block" << endl;
-		}
-		if (canGoBackward(currentBlock))
-		{
-			possibilities.push(currentBlock->behindBlock);
-			cout << "Can move to Back Block" << endl;
-		}
+		possibilities.push(currentBlock->leftBlock);
+		cout << "Can move to left Block" << endl;
+	}
+	if (canGoRightward(currentBlock))
+	{
+		possibilities.push(currentBlock->rightBlock);
+		cout << "Can move to right Block" << endl;
+	}
+	if (canGoForward(currentBlock))
+	{
+		possibilities.push(currentBlock->frontBlock);;
+		cout << "Can move to front Block" << endl;
+	}
+	if (canGoBackward(currentBlock))
+	{
+		possibilities.push(currentBlock->behindBlock);
+		cout << "Can move to Back Block" << endl;
 	}
 }
