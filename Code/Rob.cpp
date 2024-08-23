@@ -72,7 +72,7 @@ void ROB::solvePathToExit()
 void ROB::solveAllPoints(Block* currentBlock)
 {
 	// Si un Rob n'a plus de directions disponibles, son travail est termine.
-	// La methode cantGoAnywhere appelle toutes les methodes "canGo" et si toutes les directions ne sont pas disponibles, cela retourne vrai et on effectue un retour.
+	// 
 	if (cantGoAnywhere(currentBlock))
 	{
 		return;
@@ -199,6 +199,11 @@ bool ROB::canGoBackward(Block* currentBlock)
 	return false;
 }
 
+/// <summary>
+/// La méthode cantGoAnywhere appelle toutes les méthodes "canGo" par la négation.  
+/// Si tout les retours sont vrai. Le retour final sera vrai "cantGoAnywhere".
+/// </summary>
+/// <returns> booléen, vrai "cantGoAnywhere"</returns>
 bool ROB::cantGoAnywhere(Block* currentBlock)
 {
 	if (!canGoUpward(currentBlock) &&
