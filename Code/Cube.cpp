@@ -11,8 +11,8 @@ Cube::Cube(string cubePath)
 	streamInput.open(cubePath);
 	string currentLine;
 
-	Block* currentBlock = NULL;											// Initialisation à NULL pour éviter du "garbage".
-	startBlock = NULL;
+	Block* currentBlock = nullptr;										// Initialisation à NULL pour éviter du "garbage".
+	startBlock = nullptr;
 
 	if (streamInput)
 	{
@@ -55,18 +55,9 @@ Cube::Cube(string cubePath)
 }
 
 Cube::~Cube()
-{
-	for (int z = 0; z < DIMENSION; z++)
-	{
-		for (int y = 0; y < DIMENSION; y++)
-		{
-			for (int x = 0; x < DIMENSION; x++)
-			{
-				delete tabBlocks[x][y][z];								// Itération dans le cube (statique) pour détruire les blocs (dynamique) ;-).
-			}
-		}
-	}
-}
+{																		/*********************************************************************/
+																		/******* Optimisation, destruction des blocs dans ConsoleMenu. *******/
+}																		/*********************************************************************/
 
 /// <summary>
 /// Retourne le bloc "startBlock"
@@ -80,9 +71,9 @@ Block* Cube::getStartBlock()
 /// Remet la valeur de "visited" de tout les blocs visité à "false".
 /// </summary>
 void Cube::resetAllVisitedBlocksToFalse()
-{
-	for (int z = 0; z < DIMENSION; z++)
-	{
+{																		/***********************************************************/
+	for (int z = 0; z < DIMENSION; z++)									/******* Optimisation, la méthode devient essentiel. *******/
+	{																	/***********************************************************/
 		for (int y = 0; y < DIMENSION; y++)
 		{
 			for (int x = 0; x < DIMENSION; x++)
