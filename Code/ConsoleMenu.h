@@ -20,6 +20,8 @@ private:
 	void displayCredits() const;
 	bool manageSelection(char entry) const;
 
-	void displaySolution(DataStructure& solution)const;
+	void displaySolution(DataStructure& solution) const;
+
+	void displayROB(char entry) const;
 };
 

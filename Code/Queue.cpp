@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "Queue.h"
+#include <iostream>
+#include <chrono>
+#include <thread>
 
 Queue::Queue()
 {
@@ -65,5 +68,5 @@ void Queue::display() const
 		total += currentNode->getBlock()->points;
 		currentNode = currentNode->getNext();
 	}
-	cout << "Pour un total de " << total << " points" << endl << endl;
-}
+	cout << "Pour un total de " << total << " points." << endl << endl;
+}					

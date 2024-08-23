@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "ConsoleMenu.h"
+#include <iostream>
+#include <chrono>
+#include <thread>
 
 ConsoleMenu::ConsoleMenu()
 {
@@ -129,6 +132,7 @@ bool ConsoleMenu::manageSelection(char entry) const
             Stack* solution;
 			rob.solvePathToExit();
 			cout << endl;
+            displayROB(entry);
 			cout << "La solution du chemin de sortie est :" << endl;
             solution = rob.getSolutionPathToExit();  
 
@@ -157,6 +161,7 @@ bool ConsoleMenu::manageSelection(char entry) const
             Queue* solution;
             rob.solveAllPoints(cube.getStartBlock());                           // Surement le startBlock à mettre en paramètre dans solveAllPoints(cube.getStartBlock());
 			cout << endl;
+            displayROB(entry);
             cout << "La solution des points est :" << endl;
 			solution = rob.getSolutionAllPoints();
 
@@ -190,5 +195,37 @@ bool ConsoleMenu::manageSelection(char entry) const
 void ConsoleMenu::displaySolution(DataStructure& solution) const
 { 
     solution.display();
+}
+void ConsoleMenu::displayROB(char entry) const
+{
+    cout << "               ______					" << endl;
+    cout << "              |\\_____\\				" << endl;
+    cout << "              \\|_0_0_|	Beep Beep!  " << endl;
+    cout << "              __|  |___				" << endl;
+    cout << "             /\\__----/_\\				" << endl;
+    cout << "             ()--[  ]-()				" << endl;
+    cout << "                |  |					" << endl;
+    cout << "             ___|  |__					" << endl;
+    cout << "            /\\___---__\\				" << endl;
+    cout << "            \\/|________|				" << endl << endl;
+
+    if (entry == '1')
+    {
+        this_thread::sleep_for(std::chrono::seconds(1));
+        cout << "Je cherche Le chemin dans le labyrinthe." << endl;
+        this_thread::sleep_for(std::chrono::seconds(2));
+        cout << "J'ai trouve la sortie." << endl << endl;
+        this_thread::sleep_for(std::chrono::seconds(1));
+    }
+    else if (entry == '2')
+    {
+        this_thread::sleep_for(std::chrono::seconds(1));
+        cout << "Je cherche les points dans le labyrinthe." << endl;
+        this_thread::sleep_for(std::chrono::seconds(1));
+        cout << "Plusieurs chemins possibles \"activer mode: R.O.B. recursif.\"" << endl;
+        this_thread::sleep_for(std::chrono::seconds(2));
+        cout << "\"Nous\" avons trouves tous les points." << endl << endl;
+        this_thread::sleep_for(std::chrono::seconds(1));       
+    }
 }
 
