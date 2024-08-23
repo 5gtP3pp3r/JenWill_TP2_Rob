@@ -121,7 +121,7 @@ void Cube::initBlockValuesAndPoints(Block* currentBlock, string currentLine, int
 		currentBlock->value = ' ';
 	}
 	else {
-		currentBlock->points = 0;										// Si il n'y a pas de "points" sur le bloc, nous avont décidé d'initialiser cette attribut 
+		currentBlock->points = 0;										// Si il n'y a pas de "points" sur le bloc, nous avons décidé d'initialiser cette attribut 
 		currentBlock->value = currentLine[x];							// à "0". Cette décision rend la condition plus facile pour la méthode ROB::addPoints().
 	}
 	cout << "Block value: (" << currentBlock->value << ") Block points: (" << currentBlock->points << ")" << endl << endl;
