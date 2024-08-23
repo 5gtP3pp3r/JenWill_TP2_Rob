@@ -72,7 +72,6 @@ void ROB::solvePathToExit()
 void ROB::solveAllPoints(Block* currentBlock)
 {
 	// Si un Rob n'a plus de directions disponibles, son travail est termine.
-	// 
 	if (cantGoAnywhere(currentBlock))
 	{
 		return;
@@ -127,12 +126,18 @@ Queue* ROB::getSolutionAllPoints() const
 {
 	return (Queue*)&allPoints;
 }
-
+/// <summary>
+/// Retourne le nombre de directions possibles (disponibles). Utilisé dans solveAllPoints().
+/// </summary>
+/// <returns></returns>
 int ROB::countPile()
 {
 	return possibilities.getNumNodes();
 }
-
+/// <summary>
+/// Vérifie si Rob peut aller vers le haut.Retourne vrai si c'est possible.
+/// </summary>
+/// <returns>booléen</returns>
 bool ROB::canGoUpward(Block* currentBlock)
 {
 	if (currentBlock != NULL &&
@@ -217,7 +222,9 @@ bool ROB::cantGoAnywhere(Block* currentBlock)
 	}
 	return false;
 }
-
+/// <summary>
+/// Ajoute les points trouvés dans le file.
+/// </summary>
 void ROB::addPoints(Block* currentBlock)
 {
 	if (currentBlock->points > 0 &&
@@ -227,7 +234,9 @@ void ROB::addPoints(Block* currentBlock)
 		cout << currentBlock->points << " points added" << endl;
 	}
 }
-
+/// <summary>
+/// Rend le bloc actuel 'visité'. 
+/// </summary>
 void ROB::visiteBlock(Block* currentBlock)
 {
 	if (!currentBlock->visited)
@@ -236,7 +245,10 @@ void ROB::visiteBlock(Block* currentBlock)
 		cout << "Block visited" << endl;
 	}
 }
-
+/// <summary>
+/// Vérifie toutes les directions pour trouver ceux disponibles. Si une direction est disponible, on le met dans la pile.
+/// </summary>
+/// <param name="currentBlock"></param>
 void ROB::searchForWays(Block* currentBlock)
 {
 	if (canGoUpward(currentBlock))
