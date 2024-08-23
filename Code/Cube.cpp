@@ -17,12 +17,12 @@ Cube::Cube(string cubePath)
 	if (streamInput)
 	{
 		int y = DIMENSION - 1;											// Placer "y" en haut des lignes pour le décrémenter et avoir l'axe Y dans le même sense que les .txt.
-		int z = -1;														// Le fichier .txt commence par un "+" ce qui fok le premier incrément de "z" à la ligne 25.
+		int z = -1;														// Le fichier .txt commence par un "+" ce qui nuit au premier incrément de "z" à la ligne 25.
 		while (getline(streamInput, currentLine))
 		{
 			if (currentLine == "+")
 			{
-				z++;													// Incémentation de "z" pour changer de niveau dans le cube.
+				z++;													// Incrémentation de "z" pour changer de niveau dans le cube.
 				y = DIMENSION -1;										// Réinitialisation de "y" à la première valeur au changement de niveau.
 			}
 			else
@@ -30,7 +30,7 @@ Cube::Cube(string cubePath)
 				cout << endl;
 				for (int x = 0; x < DIMENSION; x++)
 				{
-					tabBlocks[x][y][z] = new Block;						// Instanciation de tout les blocs à chaque index et non une seule fois.. oups lol
+					tabBlocks[x][y][z] = new Block;						// Instanciation de tout les blocs à chaque index.
 
 					cout << "Tab position: [" << x << ", " << y << ", " << z << "]" << endl;
 					cout << "Tab address: \"" << *(&tabBlocks[x][y][z]) << "\"" << endl;
@@ -44,7 +44,7 @@ Cube::Cube(string cubePath)
 					initStartBlock(currentBlock, currentLine, x);					
 					chainLinkBlocks(currentBlock, x, y, z);
 				}
-				y--;													// Décrémentation de "y" puisque on commence "y" à DIMENSION - 1 et on vas vers "0".
+				y--;													// Décrémentation de "y" puisqu'on construit le cube de haut en bas.
 			}
 		}
 		streamInput.close();
@@ -62,7 +62,7 @@ Cube::~Cube()
 		{
 			for (int x = 0; x < DIMENSION; x++)
 			{
-				delete tabBlocks[x][y][z];								// Itération dans le cube (statique) pour détruire les blocs (dinamique).
+				delete tabBlocks[x][y][z];								// Itération dans le cube (statique) pour détruire les blocs (dynamique) ;-).
 			}
 		}
 	}
@@ -97,13 +97,13 @@ void Cube::resetAllVisitedBlocksToFalse()
 }
 
 /// <summary>
-/// Initialisation du blocs avec le nom currentBlock qui sera utilisé tout au long du constructeur.
+/// Initialisation du bloc avec le nom currentBlock qui sera utilisé tout au long du constructeur.
 /// </summary>
 /// <returns></returns>
 Block* Cube::initCurrentBlock(Block* currentBlock, int x, int y, int z)
 {
-	currentBlock = tabBlocks[x][y][z];									// Attribution d'adresse et non des valeurs x, y, z     encore oups
-	currentBlock->x = x;												// Attribution des valeurs x, y, z
+	currentBlock = tabBlocks[x][y][z];									// Attribution d'adresse.
+	currentBlock->x = x;												// Attribution des valeurs x, y, z.
 	currentBlock->y = y;
 	currentBlock->z = z;
 
@@ -117,12 +117,12 @@ Block* Cube::initCurrentBlock(Block* currentBlock, int x, int y, int z)
 void Cube::initBlockValuesAndPoints(Block* currentBlock, string currentLine, int x)
 {
 	if (isdigit(currentLine[x])) {
-		currentBlock->points = currentLine[x] - '0';					// Conversion rapide du char du .txt en int  
+		currentBlock->points = currentLine[x] - '0';					// Conversion rapide du char du .txt en int.  
 		currentBlock->value = ' ';
 	}
 	else {
 		currentBlock->points = 0;										// Si il n'y a pas de "points" sur le bloc, nous avons décidé d'initialiser cette attribut 
-		currentBlock->value = currentLine[x];							// à "0". Cette décision rend la condition plus facile pour la méthode ROB::addPoints().
+		currentBlock->value = currentLine[x];							// à "0". Cette décision rend la condition plus facile pour la méthode ROB::addPoints() :-).
 	}
 	cout << "Block value: (" << currentBlock->value << ") Block points: (" << currentBlock->points << ")" << endl << endl;
 }
@@ -150,7 +150,7 @@ void Cube::chainLinkBlocks(Block* currentBlock, int x, int y, int z)
 	}																	// demander au précédent de se chainer avec le bloc courant.
 	if (y < DIMENSION - 1)
 	{
-		currentBlock->frontBlock = tabBlocks[x][y + 1][z];				// Même commentaire pour tout les axes.
+		currentBlock->frontBlock = tabBlocks[x][y + 1][z];				// Même commentaire pour tous les axes.
 		tabBlocks[x][y + 1][z]->behindBlock = currentBlock;
 	}
 	if (z > 0)
