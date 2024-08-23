@@ -55,12 +55,12 @@ void ROB::solvePathToExit()
 			cout << "push back" << endl;
 		}
 		else															// Si Rob s'est trompé de chemin, il fait couler une larme
-		{																/// Et enleve le block de sa pile.
+		{																// Et enlève le block de sa pile.
 			stepsToExit.pop();
 			cout << "pop, back to last block" << endl;
 		}
 		visiteBlock(currentBlock);                                      // Rob prend soin de marquer les blocks qu'il visite comme étant "visité".
-		currentBlock = stepsToExit.getFirstNode()->getBlock();          /// Le premier block de la pile devient celui ou est rendu Rob!
+		currentBlock = stepsToExit.getFirstNode()->getBlock();          // Le premier block de la pile devient celui ou est rendu Rob!
 	}
 }
 
@@ -71,35 +71,35 @@ void ROB::solvePathToExit()
 /// </summary>
 void ROB::solveAllPoints(Block* currentBlock)
 {
-	if (cantGoAnywhere(currentBlock))										// Si un Rob n'a plus de directions disponibles, son travail est terminé.
+	if (cantGoAnywhere(currentBlock))									// Si un Rob n'a plus de directions disponibles, son travail est terminé.
 	{
 		return;
 	}
 
-	searchForWays(currentBlock);											// Rob vérifie toutes les directions pour avancer.
-	possibilitiesCount = countPile();										// Ensuite on calcule le nombre de directions disponibles trouvées.
+	searchForWays(currentBlock);										// Rob vérifie toutes les directions pour avancer.
+	possibilitiesCount = countPile();									// Ensuite on calcule le nombre de directions possibles trouvées.
 
-	while (possibilitiesCount > 0)											// Tant que Rob a au moins une direction disponible, il doit travailler.
+	while (possibilitiesCount > 0)										// Tant que Rob a au moins une direction possibles, il doit travailler.
 	{
-		if (possibilitiesCount == 1)										// Si il y a seulement une direction possible, Rob va se déplacer dans 
-		{																	/// cette direction grace a la pile et va continuer son travail.
+		if (possibilitiesCount == 1)									// Si il y a seulement une direction possible, Rob va se déplacer dans 
+		{																// cette direction grace à la pile et va continuer son travail.
 			currentBlock = possibilities.pop();
 			addPoints(currentBlock);
 			visiteBlock(currentBlock);
 		}
-		else if (possibilitiesCount > 1)									/// Si il y a plusieurs directions possibles, Rob va demander de l'aide a d'autres Rob
-		{																	// (appels récursifs).
+		else if (possibilitiesCount > 1)								// Si il y a plusieurs directions possibles, Rob va demander de l'aide à d'autres Rob!
+		{																	
 			for (int i = 0; i < possibilitiesCount; i++)
 			{
 				currentBlock = possibilities.pop();
 				addPoints(currentBlock);
 				visiteBlock(currentBlock);
-				solveAllPoints(currentBlock);
+				solveAllPoints(currentBlock);							// (appels récursifs).
 				cout << "Recursively moved to next block." << endl;
 			}
 		}
-		searchForWays(currentBlock);										// Rob revérifie les directions possibles. 
-		possibilitiesCount = countPile();									// On recalcul le nombre de directions possibles.
+		searchForWays(currentBlock);									// Rob revérifie les directions possibles. 
+		possibilitiesCount = countPile();								// On recalcul le nombre de directions possibles pour continuer la boucle au besoin.
 	}
 }
 
@@ -120,7 +120,7 @@ Stack* ROB::getSolutionPathToExit()
 	return (Stack*)&reversedStepsToExit;
 }
 
-/// <returns>l'Adresse de la Queue contenant la solution des points </returns>
+/// <returns>l'Adresse de la Queue contenant la solution des points. </returns>
 Queue* ROB::getSolutionAllPoints() const
 {
 	return (Queue*)&allPoints;
@@ -134,7 +134,7 @@ int ROB::countPile()
 	return possibilities.getNumNodes();
 }
 /// <summary>
-/// Vérifie si Rob peut aller vers le haut.Retourne vrai si c'est possible.
+/// Pour toutes les méthodes "canGo... Rob vérifie si il peut aller vers cette direction. Retourne vrai si c'est possible.
 /// </summary>
 /// <returns>booléen</returns>
 bool ROB::canGoUpward(Block* currentBlock)
@@ -147,7 +147,6 @@ bool ROB::canGoUpward(Block* currentBlock)
 	}
 	return false;
 }
-
 bool ROB::canGoDownward(Block* currentBlock)
 {
 	if (currentBlock != NULL &&
@@ -158,7 +157,6 @@ bool ROB::canGoDownward(Block* currentBlock)
 	}
 	return false;
 }
-
 bool ROB::canGoLeftward(Block* currentBlock)
 {
 	if (currentBlock->leftBlock != NULL &&
@@ -169,7 +167,6 @@ bool ROB::canGoLeftward(Block* currentBlock)
 	}
 	return false;
 }
-
 bool ROB::canGoRightward(Block* currentBlock)
 {
 	if (currentBlock->rightBlock != NULL &&
@@ -180,7 +177,6 @@ bool ROB::canGoRightward(Block* currentBlock)
 	}
 	return false;
 }
-
 bool ROB::canGoForward(Block* currentBlock)
 {
 	if (currentBlock->frontBlock != NULL &&
@@ -191,7 +187,6 @@ bool ROB::canGoForward(Block* currentBlock)
 	}
 	return false;
 }
-
 bool ROB::canGoBackward(Block* currentBlock)
 {
 	if (currentBlock->behindBlock != NULL &&
@@ -204,10 +199,10 @@ bool ROB::canGoBackward(Block* currentBlock)
 }
 
 /// <summary>
-/// La méthode cantGoAnywhere appelle toutes les méthodes "canGo" par la négation.  
+/// La méthode cantGoAnywhere appelle toutes les méthodes "canGo..." par la négation.  
 /// Si tout les retours sont vrai. Le retour final sera vrai "cantGoAnywhere".
 /// </summary>
-/// <returns> booléen, vrai "cantGoAnywhere"</returns>
+/// <returns> booléen, vrai "cantGoAnywhere". </returns>
 bool ROB::cantGoAnywhere(Block* currentBlock)
 {
 	if (!canGoUpward(currentBlock) &&
@@ -222,7 +217,7 @@ bool ROB::cantGoAnywhere(Block* currentBlock)
 	return false;
 }
 /// <summary>
-/// Ajoute les points trouvés dans le file.
+/// Rob ajoute les points trouvés dans le file.
 /// </summary>
 void ROB::addPoints(Block* currentBlock)
 {
@@ -245,7 +240,7 @@ void ROB::visiteBlock(Block* currentBlock)
 	}
 }
 /// <summary>
-/// Vérifie toutes les directions pour trouver ceux disponibles. Si une direction est disponible, on le met dans la pile.
+/// Rob vérifie toutes les directions pour trouver ceux disponibles. Si une direction est disponible, Rob le met dans sa pile.
 /// </summary>
 /// <param name="currentBlock"></param>
 void ROB::searchForWays(Block* currentBlock)
