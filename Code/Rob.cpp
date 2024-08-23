@@ -18,14 +18,14 @@ ROB::~ROB()
 /// </summary>
 void ROB::solvePathToExit()
 {
-	Block* currentBlock = cube->getStartBlock();
-	stepsToExit.push(currentBlock);
+	Block* currentBlock = cube->getStartBlock();						// Rob commence au block de départ :-).
+	stepsToExit.push(currentBlock);										// Il met le block dans sa pile.
 	cout << endl << "push startBlock" << endl;
 
-	while (currentBlock->value != 'E')
-	{
-		if (canGoUpward(currentBlock))
-		{
+	while (currentBlock->value != 'E')									// Tant que Rob n'a pas trouvé la sortie, il doit travailler.
+	{										
+		if (canGoUpward(currentBlock))									// Rob suit un plan de directions stricte. Quand il peut avancer, il fonce!!
+		{																// Et il met le block dans sa pile.
 			stepsToExit.push(currentBlock->upBlock);
 			cout << "push up" << endl;
 		}
@@ -54,13 +54,13 @@ void ROB::solvePathToExit()
 			stepsToExit.push(currentBlock->behindBlock);
 			cout << "push back" << endl;
 		}
-		else
-		{
+		else															// Si Rob s'est trompé de chemin, il fait couler une larme
+		{																/// Et enleve le block de sa pile.
 			stepsToExit.pop();
 			cout << "pop, back to last block" << endl;
 		}
-		visiteBlock(currentBlock);
-		currentBlock = stepsToExit.getFirstNode()->getBlock();
+		visiteBlock(currentBlock);                                      // Rob prend soin de marquer les blocks qu'il visite comme étant "visité".
+		currentBlock = stepsToExit.getFirstNode()->getBlock();          /// Le premier block de la pile devient celui ou est rendu Rob!
 	}
 }
 
@@ -71,25 +71,24 @@ void ROB::solvePathToExit()
 /// </summary>
 void ROB::solveAllPoints(Block* currentBlock)
 {
-	// Si un Rob n'a plus de directions disponibles, son travail est termine.
-	if (cantGoAnywhere(currentBlock))
+	if (cantGoAnywhere(currentBlock))										// Si un Rob n'a plus de directions disponibles, son travail est terminé.
 	{
 		return;
 	}
 
-	searchForWays(currentBlock);
-	possibilitiesCount = countPile();
+	searchForWays(currentBlock);											// Rob vérifie toutes les directions pour avancer.
+	possibilitiesCount = countPile();										// Ensuite on calcule le nombre de directions disponibles trouvées.
 
-	while (possibilitiesCount > 0)
+	while (possibilitiesCount > 0)											// Tant que Rob a au moins une direction disponible, il doit travailler.
 	{
-		if (possibilitiesCount == 1)
-		{
+		if (possibilitiesCount == 1)										// Si il y a seulement une direction possible, Rob va se déplacer dans 
+		{																	/// cette direction grace a la pile et va continuer son travail.
 			currentBlock = possibilities.pop();
 			addPoints(currentBlock);
 			visiteBlock(currentBlock);
 		}
-		else if (possibilitiesCount > 1)
-		{
+		else if (possibilitiesCount > 1)									/// Si il y a plusieurs directions possibles, Rob va demander de l'aide a d'autres Rob
+		{																	// (appels récursifs).
 			for (int i = 0; i < possibilitiesCount; i++)
 			{
 				currentBlock = possibilities.pop();
@@ -99,8 +98,8 @@ void ROB::solveAllPoints(Block* currentBlock)
 				cout << "Recursively moved to next block." << endl;
 			}
 		}
-		searchForWays(currentBlock);
-		possibilitiesCount = countPile();
+		searchForWays(currentBlock);										// Rob revérifie les directions possibles. 
+		possibilitiesCount = countPile();									// On recalcul le nombre de directions possibles.
 	}
 }
 
