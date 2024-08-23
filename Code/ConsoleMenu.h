@@ -18,10 +18,11 @@ private:
 	char readValidInput(char tabValidInputs[], int nbElements) const;
 	void displayMenu() const;
 	void displayCredits() const;
-	bool manageSelection(char entry) const;
+	bool manageSelection(char entry/*, string path, Cube cube, ROB rob*/) const;
 
 	void displaySolution(DataStructure& solution) const;
 
 	void displayROB(char entry) const;
+
 };
 

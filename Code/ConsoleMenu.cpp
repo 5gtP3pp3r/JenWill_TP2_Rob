@@ -6,7 +6,7 @@
 
 ConsoleMenu::ConsoleMenu()
 {
-	
+    
 }
 
 
@@ -26,6 +26,10 @@ void ConsoleMenu::run() const
     char tabValidInputs[] = { '1', '2', 'q' };
     const int NB_ELEMENTS = 3;
 
+    /*string path = "cube5.txt";
+    Cube cube(path);
+    ROB rob(&cube);*/
+
     //Tant qu'il ne quitte pas, on demande à l'utilisateur ce qu'il veut faire.
     do
     { 
@@ -33,7 +37,7 @@ void ConsoleMenu::run() const
 		input = readValidInput(tabValidInputs, NB_ELEMENTS);
 		
 		
-    } while (manageSelection(input));
+    } while (manageSelection(input/*, path, cube, rob*/));
 	
 }
 
@@ -97,10 +101,12 @@ void ConsoleMenu::displayCredits() const
     cout << "|                                                                 |" << endl;
     cout << "|                       mettant en vedette                        |" << endl;
     cout << "|                                                                 |" << endl;
+    cout << "|                              Rob                                |" << endl;
+    cout << "|                     Dans le role de R.O.B.                      |" << endl;
+    cout << "|                               &                                 |" << endl;
     cout << "|                *****  JennWillRobExperts  *****                 |" << endl;
     cout << "|_________________________________________________________________|" << endl;
-    cout << endl;
-	cout << endl;
+    cout << endl << endl;
 }
 
 /// <summary>
@@ -109,7 +115,7 @@ void ConsoleMenu::displayCredits() const
 /// <param name="entry">Caractère entré par l'utilisateur</param>
 /// <returns> vrai pour une visualisation (touche 1 ou 2) 
 /// faux si l'utilisateur entre q</returns>
-bool ConsoleMenu::manageSelection(char entry) const
+bool ConsoleMenu::manageSelection(char entry/*, string path, Cube cube, ROB rob*/) const
 {
     bool toContinue = true;
     /*******************************************************
@@ -117,8 +123,7 @@ bool ConsoleMenu::manageSelection(char entry) const
     NE PAS OUBLIER D'AJUSTER LA DIMENSION DANS CONSTANTS.H
     ********************************************************/
     string path = "cube5.txt";
-
-    Cube cube(path);
+    Cube cube(path);                    // Si on essais de résoudre la réinitialisation du cube à chaque choix, commenter les 3 lignes 125, 126, 127
     ROB rob(&cube);
 
     switch (entry)
@@ -159,7 +164,7 @@ bool ConsoleMenu::manageSelection(char entry) const
 		try
 		{
             Queue* solution;
-            rob.solveAllPoints(cube.getStartBlock());                           // Surement le startBlock à mettre en paramètre dans solveAllPoints(cube.getStartBlock());
+            rob.solveAllPoints(cube.getStartBlock());                           // Ajout du bon paramètre (cube.getStartBlock());
 			cout << endl;
             displayROB(entry);
             cout << "La solution des points est :" << endl;
@@ -212,7 +217,7 @@ void ConsoleMenu::displayROB(char entry) const
     if (entry == '1')
     {
         this_thread::sleep_for(std::chrono::seconds(1));
-        cout << "Je cherche Le chemin dans le labyrinthe." << endl;
+        cout << "Je cherche le chemin dans le labyrinthe." << endl;
         this_thread::sleep_for(std::chrono::seconds(2));
         cout << "J'ai trouve la sortie." << endl << endl;
         this_thread::sleep_for(std::chrono::seconds(1));
