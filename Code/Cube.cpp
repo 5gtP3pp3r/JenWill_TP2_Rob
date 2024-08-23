@@ -11,7 +11,7 @@ Cube::Cube(string cubePath)
 	streamInput.open(cubePath);
 	string currentLine;
 
-	Block* currentBlock = NULL;
+	Block* currentBlock = NULL;											// Initialisation à NULL pour éviter du "garbage".
 	startBlock = NULL;
 
 	if (streamInput)
@@ -22,8 +22,8 @@ Cube::Cube(string cubePath)
 		{
 			if (currentLine == "+")
 			{
-				z++;
-				y = DIMENSION -1;
+				z++;													// Incémentation de "z" pour changer de niveau dans le cube.
+				y = DIMENSION -1;										// Réinitialisation de "y" à la première valeur au changement de niveau.
 			}
 			else
 			{
@@ -44,7 +44,7 @@ Cube::Cube(string cubePath)
 					initStartBlock(currentBlock, currentLine, x);					
 					chainLinkBlocks(currentBlock, x, y, z);
 				}
-				y--;
+				y--;													// Décrémentation de "y" puisque on commence "y" à DIMENSION - 1 et on vas vers "0".
 			}
 		}
 		streamInput.close();
@@ -53,10 +53,6 @@ Cube::Cube(string cubePath)
 	cout << "Start Block value: (" << startBlock->value << ") Start Block points: (" << startBlock->points << ")" << endl;
 	cout << "Start Block address: \"" << *(&startBlock) << "\"" << endl << endl;
 }
-/*******	COMMENTAIRES OUT OF DATE... PROBLÈMES RÉGLÉS	********/
-/********** On a un trouble de retour NULL à la méthode getStartBlock(). Ajout de plein de cout pour confirmer les index valeurs des attributs et adresses **********/
-/******* Les affichage montre bien que les adresses et que les transferts d'adresses entre les positions du tableau, des blocks et même de startBlock suivent *******/
-/******* Le problème doit venir au moment d'appeler la méthode getStartBlock() dans Rob et sont utilisation ou autre *******/
 
 Cube::~Cube()
 {
@@ -66,18 +62,23 @@ Cube::~Cube()
 		{
 			for (int x = 0; x < DIMENSION; x++)
 			{
-				delete tabBlocks[x][y][z];
+				delete tabBlocks[x][y][z];								// Itération dans le cube (statique) pour détruire les blocs (dinamique).
 			}
 		}
 	}
 }
 
+/// <summary>
+/// Retourne le bloc "startBlock"
+/// </summary>
 Block* Cube::getStartBlock()
 {
 	return startBlock;
 }
 
-
+/// <summary>
+/// Remet la valeur de "visited" de tout les blocs visité à "false".
+/// </summary>
 void Cube::resetAllVisitedBlocksToFalse()
 {
 	for (int z = 0; z < DIMENSION; z++)
@@ -95,29 +96,40 @@ void Cube::resetAllVisitedBlocksToFalse()
 	}
 }
 
+/// <summary>
+/// Initialisation du blocs avec le nom currentBlock qui sera utilisé tout au long du constructeur.
+/// </summary>
+/// <returns></returns>
 Block* Cube::initCurrentBlock(Block* currentBlock, int x, int y, int z)
 {
-	currentBlock = tabBlocks[x][y][z];					// Attribution d'adresse et non des valeurs x, y, z     encore oups
-	currentBlock->x = x;								// Attribution des valeurs x, y, z
+	currentBlock = tabBlocks[x][y][z];									// Attribution d'adresse et non des valeurs x, y, z     encore oups
+	currentBlock->x = x;												// Attribution des valeurs x, y, z
 	currentBlock->y = y;
 	currentBlock->z = z;
 
 	return currentBlock;
 }
 
+/// <summary>
+/// Initialisation des attributs "points" et "value" avec les caractères 
+/// trouvés avec "currentLine[x] du fichier .txt fournie.
+/// </summary>
 void Cube::initBlockValuesAndPoints(Block* currentBlock, string currentLine, int x)
 {
 	if (isdigit(currentLine[x])) {
-		currentBlock->points = currentLine[x] - '0';	// Remarqué qu'on doit additionner des int plus tard, transfert du char du .txt en int  
+		currentBlock->points = currentLine[x] - '0';					// Conversion rapide du char du .txt en int  
 		currentBlock->value = ' ';
 	}
 	else {
-		currentBlock->points = 0;
-		currentBlock->value = currentLine[x];
+		currentBlock->points = 0;										// Si il n'y a pas de "points" sur le bloc, nous avont décidé d'initialiser cette attribut 
+		currentBlock->value = currentLine[x];							// à "0". Cette décision rend la condition plus facile pour la méthode ROB::addPoints().
 	}
 	cout << "Block value: (" << currentBlock->value << ") Block points: (" << currentBlock->points << ")" << endl << endl;
 }
 
+/// <summary>
+/// Initialisation de StartBlock lorsqu'un bloc a l'attribut "value" = 'S'.
+/// </summary>
 void Cube::initStartBlock(Block* currentBlock, string currentLine, int x)
 {
 	if (currentLine[x] == 'S')
@@ -126,16 +138,19 @@ void Cube::initStartBlock(Block* currentBlock, string currentLine, int x)
 	}
 }
 
+/// <summary>
+/// Chainage des blocs entre eux sur les 6 axes en une itération.
+/// </summary>
 void Cube::chainLinkBlocks(Block* currentBlock, int x, int y, int z)
 {
-	if (x > 0)
+	if (x > 0)															// On ne peut pas chainer avec le bloc précédent si on est à "0" sur les axes.
 	{
-		currentBlock->leftBlock = tabBlocks[x - 1][y][z];
-		tabBlocks[x - 1][y][z]->rightBlock = currentBlock;
-	}
+		currentBlock->leftBlock = tabBlocks[x - 1][y][z];				// Lorsqu'on est sur un bloc, on peut chainer avec le bloc précédent.
+		tabBlocks[x - 1][y][z]->rightBlock = currentBlock;				// On ne peut pas chainer avec le suivant (n'existe pas), mais on peut
+	}																	// demander au précédent de se chainer avec le bloc courant.
 	if (y < DIMENSION - 1)
 	{
-		currentBlock->frontBlock = tabBlocks[x][y + 1][z];
+		currentBlock->frontBlock = tabBlocks[x][y + 1][z];				// Même commentaire pour tout les axes.
 		tabBlocks[x][y + 1][z]->behindBlock = currentBlock;
 	}
 	if (z > 0)
