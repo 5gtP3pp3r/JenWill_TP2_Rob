@@ -11,27 +11,19 @@ ConsoleMenu::ConsoleMenu()
 
 ConsoleMenu::~ConsoleMenu()
 {
-
+	delete cube;
+	delete rob;
+	cout << endl << "***** Cube and Rob destroyed. *****" << endl << endl;
 }
 
 /// <summary>
 /// La méthode Run est le point central de notre programme.
-/// </summary>															/*****************************************************************************************************/
-void ConsoleMenu::run()													/******* Optimisation, dois enlever const car il y aura destruction donc modification d'objet. *******/
-{																		/*****************************************************************************************************/
+/// </summary>															
+void ConsoleMenu::run()											
+{																		
 	char input;
 	char tabValidInputs[] = { '1', '2', 'q' };
 	const int NB_ELEMENTS = 3;
-
-	/*******************************************************
-	Il y a aussi un fichier de 10 étages de disponible dans le répertoire launcher
-	NE PAS OUBLIER D'AJUSTER LA DIMENSION DANS CONSTANTS.H
-	********************************************************/
-
-	string path = "cube5.txt";											/*****************************************************************************/
-																		/******* Optimisation, instanciation avant la boucle de choix console. *******/
-	Cube cube(path);													/*****************************************************************************/
-	ROB rob(&cube);
 
 	//Tant qu'il ne quitte pas, on demande à l'utilisateur ce qu'il veut faire.
 	do
@@ -39,9 +31,9 @@ void ConsoleMenu::run()													/******* Optimisation, dois enlever const ca
 		displayCredits();
 		input = readValidInput(tabValidInputs, NB_ELEMENTS);
 
-																		/**************************************************************************************/
-	} while (manageSelection(input, &cube, &rob));						/******* Optimisation, utilisation de références pour ne pas copier les objets. *******/
-}																		/**************************************************************************************/
+																		
+	} while (manageSelection(input));						
+}																		
 
 /// <summary>
 /// Lit un caractère entré par l'utilisateur.
@@ -115,16 +107,20 @@ void ConsoleMenu::displayCredits() const
 /// </summary>
 /// <param name="entry">Caractère entré par l'utilisateur</param>
 /// <returns> vrai pour une visualisation (touche 1 ou 2) 
-/// faux si l'utilisateur entre q</returns>								/*******************************************************/
-bool ConsoleMenu::manageSelection(char entry, Cube* cube, ROB* rob)		/******* Optimisation, utilisation de pointeurs. *******/
-{																		/*******************************************************/
+/// faux si l'utilisateur entre q</returns>								
+bool ConsoleMenu::manageSelection(char entry) 
+{																		
 	bool toContinue = true;
 
 	switch (entry)
 	{
-																		/***************************************************************************************************/
-	case '1':															/******* Optimisation, dois changer tout les "." pour des "->" par utilisation de pointeurs. *******/
-	{																	/***************************************************************************************************/
+																		
+	case '1':															
+	{		
+		if (cube == nullptr)
+		{
+			InitCubeAndRob();
+		}
 		//Résolution du chemin de sortie
 		try
 		{
@@ -152,6 +148,10 @@ bool ConsoleMenu::manageSelection(char entry, Cube* cube, ROB* rob)		/******* Op
 	//Si l'utilisateur veut solutionner le labyrinthe,
 	case '2':
 	{
+		if (cube == nullptr)
+		{
+			InitCubeAndRob();
+		}
 		//Résolution des points
 		try
 		{
@@ -178,32 +178,34 @@ bool ConsoleMenu::manageSelection(char entry, Cube* cube, ROB* rob)		/******* Op
 		break;
 	}
 
-	case 'q':															/****************************************************************/
-		blocksDestruction(cube);										/******* Optimisation, destruction des blocs à la sortie. *******/ 
-		//On quitte le programme										/****************************************************************/
+	case 'q':															
+										
+		//On quitte le programme										
 		toContinue = false;
 		break;
 	}
 	return toContinue;
 }
 
+/// <summary>
+/// Initialisation Dynamique des cube det rob, ils resteront 
+/// vivant tout au long de la méthode manageSelection().
+/// </summary>
+void ConsoleMenu::InitCubeAndRob()
+{
+	/*******************************************************
+	Il y a aussi un fichier de 10 étages de disponible dans le répertoire launcher
+	NE PAS OUBLIER D'AJUSTER LA DIMENSION DANS CONSTANTS.H
+	********************************************************/
+	string path = "cube5.txt";
+	
+	cube = new Cube(path);												
+	rob = new ROB(cube);												
+}
+
 void ConsoleMenu::displaySolution(DataStructure& solution) const
 {
 	solution.display();
-}
-																		/******************************************************/
-void ConsoleMenu::blocksDestruction(Cube* cube)							/******* Optimisation, utilisation de pointeur. *******/
-{																		/******************************************************/
-	for (int z = 0; z < DIMENSION; z++)
-	{
-		for (int y = 0; y < DIMENSION; y++)
-		{
-			for (int x = 0; x < DIMENSION; x++)
-			{
-				delete cube->tabBlocks[x][y][z];						// Itération dans le cube (statique) pour détruire les blocs (dynamique) ;-).
-			}
-		}
-	}
 }
 
 void ConsoleMenu::displayROB(char entry) const							// Pour le plaisir :)

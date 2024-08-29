@@ -14,9 +14,10 @@ public:
 	~Cube();
 	Block* getStartBlock();
 	void resetAllVisitedBlocksToFalse();
-	//Tableau statique de tous les blocs									/********************************************************************************/
-	Block* tabBlocks[DIMENSION][DIMENSION][DIMENSION];						/******* Optimisation, doit être publique pour y accéder via ConsoleMenu. *******/
-private:																	/********************************************************************************/
+							
+private:	
+	//Tableau statique de tous les blocs									
+	Block* tabBlocks[DIMENSION][DIMENSION][DIMENSION];
 	//Le bloc de départ (utile pour la récursivité)
 	Block* startBlock;
 	//Initialisation de currentBlock et ses valeurs x, y, z.

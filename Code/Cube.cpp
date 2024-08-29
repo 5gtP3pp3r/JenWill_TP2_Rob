@@ -56,8 +56,18 @@ Cube::Cube(string cubePath)
 
 Cube::~Cube()
 {																		/*********************************************************************/
-																		/******* Optimisation, destruction des blocs dans ConsoleMenu. *******/
-}																		/*********************************************************************/
+	for (int z = 0; z < DIMENSION; z++)
+	{
+		for (int y = 0; y < DIMENSION; y++)
+		{
+			for (int x = 0; x < DIMENSION; x++)
+			{
+				delete tabBlocks[x][y][z];	                   // Itération dans le cube (statique) pour détruire les blocs (dynamique) ;-).
+			}
+		}
+	}
+	cout << endl << "***** All blocks destroyed. *****" << endl;
+}
 
 /// <summary>
 /// Retourne le bloc "startBlock"

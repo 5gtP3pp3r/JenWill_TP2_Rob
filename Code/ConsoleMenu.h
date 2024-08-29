@@ -11,20 +11,27 @@ class ConsoleMenu
 {
 public:
 	ConsoleMenu();
-	~ConsoleMenu();														/*************************************************/
-	void run();															/******* Optimisation, dois enlever const. *******/
-																		/*************************************************/
+	~ConsoleMenu();														
+	void run();															
+																		
 private:
 	char readValidInput(char tabValidInputs[], int nbElements) const;
 	void displayMenu() const;
-	void displayCredits() const;										/*******************************************************/
-	bool manageSelection(char entry, Cube* cube, ROB* rob);				/******* Optimisation, utilisation de pointeurs. *******/
-	//Méthode display polymorphe										/*******************************************************/
+	void displayCredits() const;	
+
+	//Initialisations des cube et rob.
+	void InitCubeAndRob();
+
+	//Méthode de choix des sélections.
+	bool manageSelection(char entry);				
+	//Méthode display polymorphe										
 	void displaySolution(DataStructure& solution) const;
-	//Destruction des blocs												/*********************************************************************/
-	void blocksDestruction(Cube* cube);									/******* Optimisation, destruction des blocs dans ConsoleMenu. *******/
-	//Pour le plaisir :)												/*********************************************************************/
+								
+	//Pour le plaisir :)												
 	void displayROB(char entry) const;
 
+	// Nouveaux attributs:
+	Cube* cube = nullptr;
+	ROB* rob = nullptr;
 };
 
